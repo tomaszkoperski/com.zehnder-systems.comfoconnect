@@ -1,0 +1,14 @@
+{
+    "type": "number",
+    "title": {
+        "en": "Days to replace filter"
+    },
+    "units": {
+        "en": "days"
+    },
+    "getable": true,
+    "setable": false,
+    "uiComponent": "sensor",
+    "uiQuickAction": false,
+    "insights": false
+}

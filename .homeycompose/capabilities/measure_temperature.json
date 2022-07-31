@@ -1,0 +1,14 @@
+{
+    "type": "number",
+    "title": {
+        "en": "Temperature"
+    },
+    "units": {
+        "en": "°C"
+    },
+    "getable": true,
+    "setable": false,
+    "uiComponent": "sensor",
+    "uiQuickAction": false,
+    "insights": true
+}

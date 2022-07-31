@@ -1,0 +1,23 @@
+{
+    "title": {
+      "en": "Set ventilation fan speed"
+    },
+    "titleFormatted": {
+      "en": "Set ventilation fan speed to [[speed]]"
+    },
+    "hint": {
+      "en": "Sets the speed of the ventilation fan to specified mode."
+    },
+    "args": [
+      {
+        "name": "speed",
+        "type": "dropdown",
+        "values": [
+          { "id": "1", "label": { "en": "Low" } },
+          { "id": "2", "label": { "en": "Medium" } },
+          { "id": "3", "label": { "en": "High" } },
+          { "id": "0", "label": { "en": "Away (idle)" } }
+        ]
+      }
+    ]
+}

@@ -1,0 +1,598 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "com.zehnder-systems.comfoconnect",
+  "version": "1.0.0",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Zehnder ComfoConnect"
+  },
+  "description": {
+    "en": "Adds support for the ventilation devices controlled using the Zehnder ComfoConnect LAN C module."
+  },
+  "category": [
+    "climate"
+  ],
+  "permissions": [],
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "Tomasz Koperski",
+    "email": "tomasz.koperski@gmail.com"
+  },
+  "flow": {
+    "actions": [
+      {
+        "title": {
+          "en": "Enable boost"
+        },
+        "titleFormatted": {
+          "en": "Enable boost for [[period]]"
+        },
+        "hint": {
+          "en": "Temporarily puts the fan into High speed for specified time period."
+        },
+        "args": [
+          {
+            "name": "period",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "1",
+                "label": {
+                  "en": "10 minutes"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "20 minutes"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "30 minutes"
+                }
+              }
+            ]
+          }
+        ],
+        "id": "boost"
+      },
+      {
+        "title": {
+          "en": "Set operation mode"
+        },
+        "titleFormatted": {
+          "en": "Set operation mode to [[mode]]"
+        },
+        "hint": {
+          "en": "Sets the operation mode of the ventilation unit."
+        },
+        "args": [
+          {
+            "name": "mode",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "1",
+                "label": {
+                  "en": "Manual"
+                }
+              },
+              {
+                "id": "-1",
+                "label": {
+                  "en": "Auto"
+                }
+              }
+            ]
+          }
+        ],
+        "id": "change_mode"
+      },
+      {
+        "title": {
+          "en": "Set ventilation fan speed"
+        },
+        "titleFormatted": {
+          "en": "Set ventilation fan speed to [[speed]]"
+        },
+        "hint": {
+          "en": "Sets the speed of the ventilation fan to specified mode."
+        },
+        "args": [
+          {
+            "name": "speed",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "1",
+                "label": {
+                  "en": "Low"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "Medium"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "High"
+                }
+              },
+              {
+                "id": "0",
+                "label": {
+                  "en": "Away (idle)"
+                }
+              }
+            ]
+          }
+        ],
+        "id": "change_speed"
+      }
+    ],
+    "triggers": [
+      {
+        "id": "measure_humidity_changed",
+        "title": {
+          "en": "Humidity changed"
+        },
+        "hint": {
+          "en": "The measured humidity has changed"
+        },
+        "tokens": [
+          {
+            "type": "number",
+            "name": "measure_humidity.supply",
+            "title": {
+              "en": "Supply humidity"
+            },
+            "example": {
+              "en": "60"
+            }
+          },
+          {
+            "type": "number",
+            "name": "measure_humidity.extract",
+            "title": {
+              "en": "Extract humidity"
+            },
+            "example": {
+              "en": "60"
+            }
+          },
+          {
+            "type": "number",
+            "name": "measure_humidity.outdoor",
+            "title": {
+              "en": "Outdoor humidity"
+            },
+            "example": {
+              "en": "60"
+            }
+          },
+          {
+            "type": "number",
+            "name": "measure_humidity.exhaust",
+            "title": {
+              "en": "Exhaust humidity"
+            },
+            "example": {
+              "en": "60"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=comfoconnect-lan-c"
+          }
+        ]
+      },
+      {
+        "id": "measure_temperature_changed",
+        "title": {
+          "en": "Temperature changed"
+        },
+        "hint": {
+          "en": "The measured temperature has changed"
+        },
+        "tokens": [
+          {
+            "type": "number",
+            "name": "measure_temperature.supply",
+            "title": {
+              "en": "Supply temperature"
+            },
+            "example": {
+              "en": "20"
+            }
+          },
+          {
+            "type": "number",
+            "name": "measure_temperature.extract",
+            "title": {
+              "en": "Extract temperature"
+            },
+            "example": {
+              "en": "23"
+            }
+          },
+          {
+            "type": "number",
+            "name": "measure_temperature.outdoor",
+            "title": {
+              "en": "Outdoor temperature"
+            },
+            "example": {
+              "en": "-3"
+            }
+          },
+          {
+            "type": "number",
+            "name": "measure_temperature.exhaust",
+            "title": {
+              "en": "Exhaust temperature"
+            },
+            "example": {
+              "en": "20"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=comfoconnect-lan-c"
+          }
+        ]
+      }
+    ]
+  },
+  "drivers": [
+    {
+      "name": {
+        "en": "ComfoConnect LAN C"
+      },
+      "class": "other",
+      "capabilities": [
+        "measure_power",
+        "fan_speed_mode",
+        "operating_mode",
+        "fan_duty.supply",
+        "fan_duty.exhaust",
+        "measure_temperature.outdoor",
+        "measure_temperature.supply",
+        "measure_temperature.extract",
+        "measure_temperature.exhaust",
+        "measure_humidity.outdoor",
+        "measure_humidity.supply",
+        "measure_humidity.extract",
+        "measure_humidity.exhaust",
+        "days_to_replace_filter"
+      ],
+      "capabilitiesOptions": {
+        "measure_power": {
+          "approximated": true
+        },
+        "fan_duty.supply": {
+          "title": {
+            "en": "Supply fan duty"
+          }
+        },
+        "fan_duty.exhaust": {
+          "title": {
+            "en": "Exhaust fan duty"
+          }
+        },
+        "measure_temperature.supply": {
+          "title": {
+            "en": "Supply temperature"
+          }
+        },
+        "measure_temperature.extract": {
+          "title": {
+            "en": "Extract temperature"
+          }
+        },
+        "measure_temperature.outdoor": {
+          "title": {
+            "en": "Outdoor temperature"
+          }
+        },
+        "measure_temperature.exhaust": {
+          "title": {
+            "en": "Exhaust temperature"
+          }
+        },
+        "measure_humidity.supply": {
+          "title": {
+            "en": "Supply humidity"
+          }
+        },
+        "measure_humidity.extract": {
+          "title": {
+            "en": "Extract humidity"
+          }
+        },
+        "measure_humidity.outdoor": {
+          "title": {
+            "en": "Outdoor humidity"
+          }
+        },
+        "measure_humidity.exhaust": {
+          "title": {
+            "en": "Exhaust humidity"
+          }
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "uiComponent": [
+        "picker",
+        "picker",
+        "sensor"
+      ],
+      "energy": {},
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "General settings"
+          },
+          "children": [
+            {
+              "id": "temp_profile",
+              "type": "dropdown",
+              "value": "normal",
+              "label": {
+                "en": "Temperature profile"
+              },
+              "values": [
+                {
+                  "id": "warm",
+                  "label": {
+                    "en": "Warm"
+                  }
+                },
+                {
+                  "id": "normal",
+                  "label": {
+                    "en": "Normal"
+                  }
+                },
+                {
+                  "id": "cool",
+                  "label": {
+                    "en": "Cool"
+                  }
+                }
+              ],
+              "hint": {
+                "en": "Select the best temperature profile for your liking."
+              }
+            },
+            {
+              "id": "bypass",
+              "type": "dropdown",
+              "value": "auto",
+              "label": {
+                "en": "Bypass"
+              },
+              "values": [
+                {
+                  "id": "auto",
+                  "label": {
+                    "en": "Auto"
+                  }
+                },
+                {
+                  "id": "on",
+                  "label": {
+                    "en": "Activated"
+                  }
+                },
+                {
+                  "id": "off",
+                  "label": {
+                    "en": "Deactivated"
+                  }
+                }
+              ],
+              "hint": {
+                "en": "Set the heat recovery control of the bypass functionality.\nAuto: the unit will control the heat recovery control automatically; (default setting)\nActivated: the unit will decrease the heat recovery control to a minimum (if possible outdoor air is supplied directly into the dwelling);\nDeactivated: the unit will increase the heat recovery control to a maximum."
+              }
+            },
+            {
+              "id": "vent_mode",
+              "type": "dropdown",
+              "value": "balance",
+              "label": {
+                "en": "Ventilation mode"
+              },
+              "values": [
+                {
+                  "id": "balance",
+                  "label": {
+                    "en": "Balance"
+                  }
+                },
+                {
+                  "id": "supply",
+                  "label": {
+                    "en": "Supply only"
+                  }
+                },
+                {
+                  "id": "extract",
+                  "label": {
+                    "en": "Extract only"
+                  }
+                }
+              ],
+              "hint": {
+                "en": "Balance will start both supply and extract fan."
+              }
+            }
+          ]
+        }
+      ],
+      "images": {
+        "small": "/drivers/comfoconnect-lan-c/assets/images/small.png",
+        "large": "/drivers/comfoconnect-lan-c/assets/images/large.png",
+        "xlarge": "/drivers/comfoconnect-lan-c/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "comfoconnect-lan-c"
+    }
+  ],
+  "capabilities": {
+    "days_to_replace_filter": {
+      "type": "number",
+      "title": {
+        "en": "Days to replace filter"
+      },
+      "units": {
+        "en": "days"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "uiQuickAction": false,
+      "insights": false
+    },
+    "fan_duty": {
+      "type": "number",
+      "title": {
+        "en": "Fan duty"
+      },
+      "units": {
+        "en": "%"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "uiQuickAction": false,
+      "insights": false
+    },
+    "fan_speed_mode": {
+      "type": "enum",
+      "title": {
+        "en": "Fan speed"
+      },
+      "values": [
+        {
+          "id": "1",
+          "title": {
+            "en": "Low"
+          }
+        },
+        {
+          "id": "2",
+          "title": {
+            "en": "Medium"
+          }
+        },
+        {
+          "id": "3",
+          "title": {
+            "en": "High"
+          }
+        },
+        {
+          "id": "0",
+          "title": {
+            "en": "Away"
+          }
+        }
+      ],
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "uiQuickAction": false,
+      "insights": false
+    },
+    "measure_humidity": {
+      "type": "number",
+      "title": {
+        "en": "Humidity"
+      },
+      "units": {
+        "en": "%"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "uiQuickAction": false,
+      "insights": true
+    },
+    "measure_temperature": {
+      "type": "number",
+      "title": {
+        "en": "Temperature"
+      },
+      "units": {
+        "en": "°C"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "uiQuickAction": false,
+      "insights": true
+    },
+    "operating_mode": {
+      "type": "enum",
+      "title": {
+        "en": "Operating mode"
+      },
+      "values": [
+        {
+          "id": "1",
+          "title": {
+            "en": "Manual"
+          }
+        },
+        {
+          "id": "-1",
+          "title": {
+            "en": "Auto"
+          }
+        }
+      ],
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "uiQuickAction": false,
+      "insights": true
+    }
+  }
+}

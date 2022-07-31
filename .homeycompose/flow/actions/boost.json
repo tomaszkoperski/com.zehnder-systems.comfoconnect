@@ -1,0 +1,22 @@
+{
+    "title": {
+      "en": "Enable boost"
+    },
+    "titleFormatted": {
+      "en": "Enable boost for [[period]]"
+    },
+    "hint": {
+      "en": "Temporarily puts the fan into High speed for specified time period."
+    },
+    "args": [
+      {
+        "name": "period",
+        "type": "dropdown",
+        "values": [
+          { "id": "1", "label": { "en": "10 minutes" } },
+          { "id": "2", "label": { "en": "20 minutes" } },
+          { "id": "3", "label": { "en": "30 minutes" } }
+        ]
+      }
+    ]
+}

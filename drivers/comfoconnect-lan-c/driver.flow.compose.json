@@ -1,0 +1,104 @@
+{
+  "triggers": [
+    {
+      "id": "measure_humidity_changed",
+      "title": {
+        "en": "Humidity changed"
+      },
+      "hint": {
+        "en": "The measured humidity has changed"
+      },
+      "tokens": [
+        {
+          "type": "number",
+          "name": "measure_humidity.supply",
+          "title": {
+            "en": "Supply humidity"
+          },
+          "example": {
+            "en": "60"
+          }
+        },
+        {
+          "type": "number",
+          "name": "measure_humidity.extract",
+          "title": {
+            "en": "Extract humidity"
+          },
+          "example": {
+            "en": "60"
+          }
+        },
+        {
+          "type": "number",
+          "name": "measure_humidity.outdoor",
+          "title": {
+            "en": "Outdoor humidity"
+          },
+          "example": {
+            "en": "60"
+          }
+        },        {
+          "type": "number",
+          "name": "measure_humidity.exhaust",
+          "title": {
+            "en": "Exhaust humidity"
+          },
+          "example": {
+            "en": "60"
+          }
+        }
+      ]
+    },
+    {
+      "id": "measure_temperature_changed",
+      "title": {
+        "en": "Temperature changed"
+      },
+      "hint": {
+        "en": "The measured temperature has changed"
+      },
+      "tokens": [
+        {
+          "type": "number",
+          "name": "measure_temperature.supply",
+          "title": {
+            "en": "Supply temperature"
+          },
+          "example": {
+            "en": "20"
+          }
+        },
+        {
+          "type": "number",
+          "name": "measure_temperature.extract",
+          "title": {
+            "en": "Extract temperature"
+          },
+          "example": {
+            "en": "23"
+          }
+        },
+        {
+          "type": "number",
+          "name": "measure_temperature.outdoor",
+          "title": {
+            "en": "Outdoor temperature"
+          },
+          "example": {
+            "en": "-3"
+          }
+        },        {
+          "type": "number",
+          "name": "measure_temperature.exhaust",
+          "title": {
+            "en": "Exhaust temperature"
+          },
+          "example": {
+            "en": "20"
+          }
+        }
+      ]
+    }
+  ]
+}

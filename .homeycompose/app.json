@@ -1,0 +1,28 @@
+{
+  "id": "com.zehnder-systems.comfoconnect",
+  "version": "1.0.0",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Zehnder ComfoConnect"
+  },
+  "description": {
+    "en": "Adds support for the ventilation devices controlled using the Zehnder ComfoConnect LAN C module."
+  },
+  "category": [
+    "climate"
+  ],
+  "permissions": [],
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "Tomasz Koperski",
+    "email": "tomasz.koperski@gmail.com"
+  }
+}

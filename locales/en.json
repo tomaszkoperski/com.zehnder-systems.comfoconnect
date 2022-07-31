@@ -1,0 +1,7 @@
+{
+    "settings": {
+      "title": "Zehnder ComfoConnect LAN C app config",
+      "subtitle": "Please provide details of your LAN C gateway."
+    },
+    "device_unavailable": "Unable to communicate with the ComfoConnect LAN C gateway"
+}
