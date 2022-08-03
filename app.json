@@ -25,10 +25,14 @@
   },
   "author": {
     "name": "Tomasz Koperski",
-    "email": "tomasz.koperski@gmail.com"
+    "email": "tomasz@koper.ski"
   },
   "source": "https://github.com/tomaszkoperski/com.zehnder-systems.comfoconnect",
   "support": "https://github.com/tomaszkoperski/com.zehnder-systems.comfoconnect/issues",
+  "bugs": {
+    "url": "https://github.com/tomaszkoperski/com.zehnder-systems.comfoconnect/issues"
+  },
+  "homeyCommunityTopicId": 66891,
   "flow": {
     "actions": [
       {
@@ -77,7 +81,7 @@
           "en": "Set operation mode to [[mode]]"
         },
         "hint": {
-          "en": "Sets the operation mode of the ventilation unit."
+          "en": "Sets the operation mode of the ventilation unit"
         },
         "args": [
           {

@@ -6,7 +6,7 @@
       "en": "Set operation mode to [[mode]]"
     },
     "hint": {
-      "en": "Sets the operation mode of the ventilation unit."
+      "en": "Sets the operation mode of the ventilation unit"
     },
     "args": [
       {
