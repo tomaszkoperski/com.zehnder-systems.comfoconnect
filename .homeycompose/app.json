@@ -9,8 +9,9 @@
   "name": {
     "en": "Zehnder ComfoConnect"
   },
+  "brandColor": "#E30614",
   "description": {
-    "en": "Adds support for the ventilation devices controlled using the Zehnder ComfoConnect LAN C module."
+    "en": "Always the best climate"
   },
   "category": [
     "climate"
@@ -23,6 +24,12 @@
   },
   "author": {
     "name": "Tomasz Koperski",
-    "email": "tomasz.koperski@gmail.com"
-  }
+    "email": "tomasz@koper.ski"
+  },
+  "source": "https://github.com/tomaszkoperski/com.zehnder-systems.comfoconnect",
+  "support": "https://github.com/tomaszkoperski/com.zehnder-systems.comfoconnect/issues",
+  "bugs": {
+    "url": "https://github.com/tomaszkoperski/com.zehnder-systems.comfoconnect/issues"
+  },
+  "homeyCommunityTopicId": 66891
 }
