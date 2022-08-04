@@ -25,14 +25,12 @@ class ComfoConnectApp extends Homey.App {
       uuid: '20200428000000000000000009080407',
       comfoair: this.homey.settings.get('ip'),
       pin: this.homey.settings.get('pin'),
-      multicast: '255.255.255.255',
+      multicast: '224.0.0.1',
       debug: false,
-      verbose: false
+      verbose: true
     };
 
     this.bridgeStatus = {}
-
-    this.log(`Bridge settings: ${JSON.stringify(this.bridgeSettings)}`);
 
     this.homey.settings.on('set', async key => {
       if (this.connected) { await this.disconnect(); }
@@ -64,6 +62,8 @@ class ComfoConnectApp extends Homey.App {
       if (!this.bridgeSettings.comfoair || !this.bridgeSettings.pin) {
         throw new Error('ComfoConnect module not configured. Check config in app settings.');
       }
+
+      this.log(`Bridge settings: ${JSON.stringify(this.bridgeSettings)}`);
 
       // create bridge
       this.bridge = new comfoconnect(this.bridgeSettings);

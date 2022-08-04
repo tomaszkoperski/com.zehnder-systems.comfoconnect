@@ -28,7 +28,6 @@ class ComfoConnectLanCDriver extends Driver {
       this.homey.app.setOperatingMode(args['mode']);
     });
 
-
   }
 
   /**

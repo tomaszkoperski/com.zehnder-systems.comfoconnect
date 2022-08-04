@@ -1,7 +1,8 @@
 {
     "settings": {
       "title": "Gateway network configuration",
-      "subtitle": "Please provide IP address an PIN for your ComfoConnect LAN C gateway (the default PIN is 0000)."
+      "subtitle": "Please provide IP address and PIN for your ComfoConnect LAN C gateway (the default PIN is 0000).",
+      "disclaimer": "After you save, please also restart the app for the changes to take effect."
     },
-    "device_unavailable": "Unable to communicate with the ComfoConnect LAN C gateway"
+    "device_unavailable": "Unable to communicate with the ComfoConnect LAN C gateway."
 }
