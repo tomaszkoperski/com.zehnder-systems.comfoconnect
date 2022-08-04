@@ -4,5 +4,8 @@
   },
   "1.0.1": {
     "en": "Fixed an issue with handling empty configuration"
+  },
+  "1.0.2": {
+    "en": "More fixes in empty config handling. Minor reliability improvements."
   }
 }
