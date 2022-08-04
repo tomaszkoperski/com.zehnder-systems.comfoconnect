@@ -1,7 +1,7 @@
 {
     "settings": {
-      "title": "Zehnder ComfoConnect LAN C app config",
-      "subtitle": "Please provide details of your LAN C gateway."
+      "title": "Gateway network configuration",
+      "subtitle": "Please provide IP address an PIN for your ComfoConnect LAN C gateway (the default PIN is 0000)."
     },
     "device_unavailable": "Unable to communicate with the ComfoConnect LAN C gateway"
 }

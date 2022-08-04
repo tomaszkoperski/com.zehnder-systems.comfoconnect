@@ -21,11 +21,11 @@ class ComfoConnectApp extends Homey.App {
     this.reconnect = false; //Should reconnect with the bridge?
 
     this.bridgeSettings = {
-      pin: this.homey.settings.get('pin'),
-      uuid: '20200428000000000000000009080407',
       device: 'Homey PRO',
-      multicast: '255.255.255.255',
+      uuid: '20200428000000000000000009080407',
       comfoair: this.homey.settings.get('ip'),
+      pin: this.homey.settings.get('pin'),
+      multicast: '255.255.255.255',
       debug: false,
       verbose: false
     };
@@ -34,23 +34,25 @@ class ComfoConnectApp extends Homey.App {
 
     this.log(`Bridge settings: ${JSON.stringify(this.bridgeSettings)}`);
 
-    if (this.bridgeSettings.comfoair == null || this.bridgeSettings.pin == null) {
-      this.log('ComfoConnect module not configured. Check config in app settings.');
-      return;
-    }
-
     this.homey.settings.on('set', async key => {
+      if (this.connected) { await this.disconnect(); }
       this.log('App settings updated...');
       this.bridgeSettings.pin = this.homey.settings.get('pin');
       this.bridgeSettings.comfoair = this.homey.settings.get('ip');
       this.log(`New IP: ${this.bridgeSettings.comfoair}`);
       this.log(`New PIN: ${this.bridgeSettings.pin}`);
-      this.disconnect();
-      this.bridge = null; 
-      this.connect();
+      if (this.bridgeSettings.comfoair && this.bridgeSettings.pin) {
+        this.log(`Connecting using new config...`)
+        await this.connect();
+      }
       return;
     });
 
+    if (!this.bridgeSettings.comfoair || !this.bridgeSettings.pin) {
+      this.log('ComfoConnect module not configured. Check config in app settings.');
+      return;
+    }
+    
     this.keepAlive = this.keepAlive.bind(this);
 
     this.log('App init finished...');
@@ -58,12 +60,24 @@ class ComfoConnectApp extends Homey.App {
 
   async connect() {
     try {
+      this.log(`Connecting...`);
+      if (!this.bridgeSettings.comfoair || !this.bridgeSettings.pin) {
+        throw new Error('ComfoConnect module not configured. Check config in app settings.');
+      }
+
       // create bridge
       this.bridge = new comfoconnect(this.bridgeSettings);
 
-      // discover
-      await this.bridge.discover();
+      // discover - this opens up a UDP socket which waits indefinitely for connection. If the IP was bad, this will permanently block the port.
+      // to fix that we're doing a Promise race here to abort and potentially destroy the bridge if this hangs
+      await Promise.race([
+        this.bridge.discover(),
+        new Promise((resolve) => setTimeout(resolve, 10000))
+      ]);
+ 
       if (this.bridge._bridge.isdiscovered != true) {
+        this.bridge = null;
+        delete this.bridge;
         throw new Error('Unable to discover the bridge');
       }
 
@@ -107,7 +121,6 @@ class ComfoConnectApp extends Homey.App {
         this.connected = false;
       });
 
-      this.connected = true;
       this.homey.setTimeout(this.keepAlive, 8000);
       return true;
 
@@ -148,7 +161,7 @@ class ComfoConnectApp extends Homey.App {
 
   async activate() {
     this.reconnect = true;
-    this.connect();
+    await this.connect();
   }
 
 
@@ -160,7 +173,7 @@ class ComfoConnectApp extends Homey.App {
 
 
   async getInfo() {
-    if (this.bridge.settings.comfouuid !== undefined) {
+    if (typeof this.bridge.settings.comfouuid !== undefined) {
       let device = {
         name: 'ComfoConnect LAN C',
         data: {
@@ -192,7 +205,7 @@ class ComfoConnectApp extends Homey.App {
 
 
   async pushReadings() {
-    this.log("!!! Update started...");
+    this.log("!!! Pushing readings...");
     const promises = [];
 
     try {
@@ -206,9 +219,9 @@ class ComfoConnectApp extends Homey.App {
         }
       }
       await Promise.all(promises);
-      this.log("!!! Update ended.");
+      this.log("!!! Push ended.");
     } catch (err) {
-      this.log(`Polling error: ${err.message}`)
+      this.log(`Push error: ${err.message}`)
     }
   }
 

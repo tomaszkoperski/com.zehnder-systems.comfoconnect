@@ -9,7 +9,6 @@ class ComfoConnectLanCDriver extends Driver {
    */
   async onInit() {
     this.log('ComfoConnect LAN C driver has been initialized');
-    this.homey.app.activate();
 
     const cardChangeSpeed = this.homey.flow.getActionCard('change_speed');
     cardChangeSpeed.registerRunListener(async (args, state) => {
@@ -38,14 +37,15 @@ class ComfoConnectLanCDriver extends Driver {
    * This should return an array with the data of devices that are available for pairing.
    */
   async onPairListDevices() {
-
-    const bridge = await this.homey.app.getInfo();
-
-    if ( bridge !== null) {
+    try {
+      await this.homey.app.activate();
+      const bridge = await this.homey.app.getInfo();
       return [bridge];
-    } else { 
-      return [];
+    } catch (err)  {      
+      this.log(`Error in onPairListDevices(): ${err.message}`);
     }
+    return [];
+    
   }
 
 }

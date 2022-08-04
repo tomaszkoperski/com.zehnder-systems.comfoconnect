@@ -9,7 +9,7 @@ class ComfoConnectLanC extends Device {
    */
   async onInit() {
     this.log('ComfoConnect LAN C has been initialized');
-    //this.homey.app.activate();
+    this.homey.app.activate();
 
     this.registerCapabilityListener('fan_speed_mode', async (value) => {
       this.log(`Setting fan mode to ${value}`);
@@ -43,7 +43,7 @@ class ComfoConnectLanC extends Device {
       }
     });
 
-    await this.__updateDevice();
+    //await this.__updateDevice();
 
   }
 
@@ -52,8 +52,7 @@ class ComfoConnectLanC extends Device {
    */
   async onAdded() {
     this.log('ComfoConnect LAN C has been added');
-    //this.homey.app.activate();
-    this.__updateDevice();
+    //this.__updateDevice();
   }
 
   /**
@@ -136,7 +135,6 @@ class ComfoConnectLanC extends Device {
    */
   async onRenamed(name) {
     this.log('ComfoConnect LAN C was renamed');
-    this.__updateDevice();
   }
 
   /**
