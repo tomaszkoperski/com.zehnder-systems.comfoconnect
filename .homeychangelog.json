@@ -10,5 +10,8 @@
   },
   "1.0.3": {
     "en": "Added info to restart the app after gateway IP change"
+  },
+  "1.0.4": {
+    "en": "Fixed mode change flow card"
   }
 }
