@@ -270,7 +270,7 @@ class ComfoConnectApp extends Homey.App {
   }
 
 
-  setOperationgMode(value) {
+  setOperatingMode(value) {
     this.log(`Setting operating mode to ${value}`);
     switch (value) {
       case "1":
