@@ -192,15 +192,20 @@ class ComfoConnectApp extends Homey.App {
 
 
   async keepAlive() {
-    if (!this.connected) {
-      if (this.reconnect) {
-        this.restartSession();
+    try {
+      if (!this.connected) {
+        if (this.reconnect) {
+          this.restartSession();
+        }
+        return;
       }
-      return;
+      this.bridge.KeepAlive();
+      this.pushReadings();
+      this.homey.setTimeout(this.keepAlive, 8000);
+    } catch (err) {
+      this.log(`Error in keepAlive: ${err.message}`);
     }
-    this.bridge.KeepAlive();
-    this.pushReadings();
-    this.homey.setTimeout(this.keepAlive, 8000);
+
   }
 
 
