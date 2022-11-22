@@ -17,6 +17,8 @@
     "measure_humidity.supply",
     "measure_humidity.extract",
     "measure_humidity.exhaust",
+    "measure_airflow.supply",
+    "measure_airflow.exhaust",
     "days_to_replace_filter"
   ],
   "capabilitiesOptions": {
@@ -71,6 +73,16 @@
     "measure_humidity.exhaust": {
       "title": {
         "en": "Exhaust humidity"
+      }
+    },
+    "measure_airflow.supply": {
+      "title": {
+        "en": "Supply airflow"
+      }
+    },
+    "measure_airflow.exhaust": {
+      "title": {
+        "en": "Exhaust airflow"
       }
     }
   },

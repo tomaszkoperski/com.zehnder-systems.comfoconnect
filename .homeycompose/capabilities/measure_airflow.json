@@ -1,0 +1,14 @@
+{
+    "type": "number",
+    "title": {
+        "en": "Airflow"
+    },
+    "units": {
+        "en": "m³/h"
+    },
+    "getable": true,
+    "setable": false,
+    "uiComponent": "sensor",
+    "uiQuickAction": false,
+    "insights": true
+}
