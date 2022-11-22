@@ -1,6 +1,8 @@
 'use strict';
 
-const { Device } = require('homey');
+const {
+  Device
+} = require('homey');
 
 class ComfoConnectLanC extends Device {
 
@@ -10,6 +12,20 @@ class ComfoConnectLanC extends Device {
   async onInit() {
     this.log('ComfoConnect LAN C has been initialized');
     this.homey.app.activate();
+
+    //Check capabilities, add missing ones
+    for (var capability of this.getCapabilities()) {
+      this.log(`Found capability: ${capability}`);
+
+      // Added in v1.1.0 It is safe to add them forcefully.
+      if (!this.hasCapability('measure_airflow.supply')) {
+        this.addCapability('measure_airflow.supply');
+      }
+      if (!this.hasCapability('measure_airflow.exhaust')) {
+        this.addCapability('measure_airflow.exhaust');
+      }
+
+    }
 
     this.registerCapabilityListener('fan_speed_mode', async (value) => {
       this.log(`Setting fan mode to ${value}`);
@@ -63,7 +79,11 @@ class ComfoConnectLanC extends Device {
    * @param {string[]} event.changedKeys An array of keys changed since the previous version
    * @returns {Promise<string|void>} return a custom message that will be displayed
    */
-  async onSettings({ oldSettings, newSettings, changedKeys }) {
+  async onSettings({
+    oldSettings,
+    newSettings,
+    changedKeys
+  }) {
 
     try {
       this.log('ComfoConnect LAN C settings where changed');
@@ -165,6 +185,9 @@ class ComfoConnectLanC extends Device {
       this.setCapabilityValueLog('measure_temperature.exhaust', r.SENSOR_TEMPERATURE_EXHAUST);
       this.setCapabilityValueLog('measure_temperature.extract', r.SENSOR_TEMPERATURE_EXTRACT);
       this.setCapabilityValueLog('measure_temperature.outdoor', r.SENSOR_TEMPERATURE_OUTDOOR);
+
+      this.setCapabilityValueLog('measure_airflow.supply', r.SENSOR_FAN_SUPPLY_FLOW);
+      this.setCapabilityValueLog('measure_airflow.exhaust', r.SENSOR_FAN_EXHAUST_FLOW)
 
       this.setAvailable();
     } catch (err) {

@@ -13,5 +13,8 @@
   },
   "1.0.4": {
     "en": "Fixed mode change flow card"
+  },
+  "1.1.0": {
+    "en": "Added airflow measurement capabilities"
   }
 }

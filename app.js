@@ -148,6 +148,8 @@ class ComfoConnectApp extends Homey.App {
       await this.bridge.RegisterSensor(291); // SENSOR_HUMIDITY_EXHAUST
       await this.bridge.RegisterSensor(292); // SENSOR_HUMIDITY_OUTDOOR
       await this.bridge.RegisterSensor(294); // SENSOR_HUMIDITY_SUPPLY
+      await this.bridge.RegisterSensor(119); // SENSOR_FAN_EXHAUST_FLOW
+      await this.bridge.RegisterSensor(120); // SENSOR_FAN_SUPPLY_FLOW
       await this.bridge.RegisterSensor(128); // SENSOR_POWER_CURRENT
       await this.bridge.RegisterSensor(65); // SENSOR_FAN_SPEED_MODE
       await this.bridge.RegisterSensor(192); // SENSOR_DAYS_TO_REPLACE_FILTER
@@ -196,6 +198,7 @@ class ComfoConnectApp extends Homey.App {
       if (!this.connected) {
         if (this.reconnect) {
           this.restartSession();
+          return;
         }
         return;
       }
@@ -235,7 +238,9 @@ class ComfoConnectApp extends Homey.App {
     try {
       this.bridge.StartSession(false);
       this.enableSensors();
-      this.homey.setTimeout(this.keepAlive, 8000);
+      //sometimes, immediately after reconnecting, the device can push 0s for all values.
+      //a not-to-elegant way to solve is just wait for it to settle down
+      this.homey.setTimeout(this.keepAlive, 20000);
     } catch (err) {
       this.log(`Unable to restartSession: ${err.message}`);
     }

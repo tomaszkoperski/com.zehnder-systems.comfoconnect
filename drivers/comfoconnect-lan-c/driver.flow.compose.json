@@ -1,6 +1,5 @@
 {
-  "triggers": [
-    {
+  "triggers": [{
       "id": "measure_humidity_changed",
       "title": {
         "en": "Humidity changed"
@@ -8,8 +7,7 @@
       "hint": {
         "en": "The measured humidity has changed"
       },
-      "tokens": [
-        {
+      "tokens": [{
           "type": "number",
           "name": "measure_humidity.supply",
           "title": {
@@ -38,7 +36,7 @@
           "example": {
             "en": "60"
           }
-        },        {
+        }, {
           "type": "number",
           "name": "measure_humidity.exhaust",
           "title": {
@@ -58,8 +56,7 @@
       "hint": {
         "en": "The measured temperature has changed"
       },
-      "tokens": [
-        {
+      "tokens": [{
           "type": "number",
           "name": "measure_temperature.supply",
           "title": {
@@ -88,7 +85,7 @@
           "example": {
             "en": "-3"
           }
-        },        {
+        }, {
           "type": "number",
           "name": "measure_temperature.exhaust",
           "title": {
@@ -96,6 +93,36 @@
           },
           "example": {
             "en": "20"
+          }
+        }
+      ]
+    },
+    {
+      "id": "measure_airflow_changed",
+      "title": {
+        "en": "Airflow changed"
+      },
+      "hint": {
+        "en": "The measured airflow has changed"
+      },
+      "tokens": [{
+          "type": "number",
+          "name": "measure_airflow.supply",
+          "title": {
+            "en": "Supply airflow"
+          },
+          "example": {
+            "en": "270"
+          }
+        },
+        {
+          "type": "number",
+          "name": "measure_airflow.exhaust",
+          "title": {
+            "en": "Exhaust airflow"
+          },
+          "example": {
+            "en": "270"
           }
         }
       ]
