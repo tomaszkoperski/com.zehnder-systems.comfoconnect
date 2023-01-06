@@ -155,6 +155,8 @@ class ComfoConnectApp extends Homey.App {
       await this.bridge.RegisterSensor(192); // SENSOR_DAYS_TO_REPLACE_FILTER
       await this.bridge.RegisterSensor(209); // SENSOR_CURRENT_RMOT
       await this.bridge.RegisterSensor(56); // SENSOR_CURRENT_RMOT
+      await this.bridge.RegisterSensor(70); // SENSOR_FAN_MODE_SUPPLY
+      await this.bridge.RegisterSensor(71); // SENSOR_FAN_MODE_EXHAUST
     } catch (err) {
       this.log(`Error when enabling sensors: ${err.message}`);
     }
@@ -306,6 +308,25 @@ class ComfoConnectApp extends Homey.App {
         break;
       default:
     }
+  }
+
+  setVentilationMode(value) {
+    this.log(`Setting ventilation mode to ${value}`);
+    switch (value) {
+      case "1":
+        this.sendCommand('VENTMODE_SUPPLY_OFF');
+        this.sendCommand('VENTMODE_EXTRACT_OFF')
+        break;
+      case "2":
+        this.sendCommand('VENTMODE_SUPPLY');
+        this.sendCommand('VENTMODE_EXTRACT_OFF')
+        break;
+      case "3":
+        this.sendCommand('VENTMODE_EXTRACT');
+        this.sendCommand('VENTMODE_SUPPLY_OFF');
+        break;
+      default:
+      }
   }
 
 }

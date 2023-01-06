@@ -25,38 +25,26 @@ class ComfoConnectLanC extends Device {
         this.addCapability('measure_airflow.exhaust');
       }
 
+      // Added in v1.2.0
+      if (!this.hasCapability('ventilation_mode')) {
+        this.addCapability('ventilation_mode');
+      }
+
     }
 
     this.registerCapabilityListener('fan_speed_mode', async (value) => {
       this.log(`Setting fan mode to ${value}`);
-      switch (value) {
-        case "0":
-          this.homey.app.sendCommand('FAN_MODE_AWAY');
-          break;
-        case "1":
-          this.homey.app.sendCommand('FAN_MODE_LOW');
-          break;
-        case "2":
-          this.homey.app.sendCommand('FAN_MODE_MEDIUM');
-          break;
-        case "3":
-          this.homey.app.sendCommand('FAN_MODE_HIGH');
-          break;
-        default:
-      }
+      this.homey.app.setSpeed(value);
     });
 
     this.registerCapabilityListener('operating_mode', async (value) => {
       this.log(`Setting operating mode to ${value}`);
-      switch (value) {
-        case "1":
-          this.homey.app.sendCommand('MODE_MANUAL');
-          break;
-        case "-1":
-          this.homey.app.sendCommand('MODE_AUTO');
-          break;
-        default:
-      }
+      this.homey.app.setOperatingMode(value);
+    });
+
+    this.registerCapabilityListener('ventilation_mode', async (value) => {
+      this.log(`Setting ventilation mode to ${value}`);
+      this.homey.app.setVentilationMode(value);
     });
 
     //await this.__updateDevice();
@@ -91,22 +79,6 @@ class ComfoConnectLanC extends Device {
       this.log(`ChangedKeys: ${JSON.stringify(changedKeys)}`);
 
       for (const key of changedKeys) {
-        if (key == "vent_mode") {
-          this.log(`Changing vent mode to ${newSettings.vent_mode}`);
-          switch (newSettings.vent_mode) {
-            case 'balance':
-              this.homey.app.sendCommand('VENTMODE_BALANCE');
-              break;
-            case 'supply':
-              this.homey.app.sendCommand('VENTMODE_SUPPLY');
-              break;
-            case 'extract':
-              this.homey.app.sendCommand('VENTMODE_EXTRACT');
-              break;
-            default:
-          }
-        }
-
         if (key == "bypass") {
           this.log(`Changing vent mode to ${newSettings.bypass}`);
           switch (newSettings.bypass) {
@@ -187,7 +159,15 @@ class ComfoConnectLanC extends Device {
       this.setCapabilityValueLog('measure_temperature.outdoor', r.SENSOR_TEMPERATURE_OUTDOOR);
 
       this.setCapabilityValueLog('measure_airflow.supply', r.SENSOR_FAN_SUPPLY_FLOW);
-      this.setCapabilityValueLog('measure_airflow.exhaust', r.SENSOR_FAN_EXHAUST_FLOW)
+      this.setCapabilityValueLog('measure_airflow.exhaust', r.SENSOR_FAN_EXHAUST_FLOW);
+
+      let vent_mode = 1; //Balance
+      if (r.SENSOR_FAN_MODE_SUPPLY == 1){
+        vent_mode = 2; //Supply only
+      } else if (r.SENSOR_FAN_MODE_EXHAUST == 1) {
+        vent_mode = 3; //Extract only
+      }
+      this.setCapabilityValueLog('ventilation_mode', vent_mode.toString())
 
       this.setAvailable();
     } catch (err) {

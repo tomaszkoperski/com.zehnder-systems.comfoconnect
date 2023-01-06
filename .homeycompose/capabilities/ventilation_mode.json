@@ -1,0 +1,29 @@
+{
+    "type": "enum",
+    "title": {
+        "en": "Ventilation mode"
+    },
+    "values": [
+        {
+            "id": "1",
+            "title": {
+                "en": "Balance"
+            }
+        }, {
+            "id": "2",
+            "title": {
+                "en": "Supply only"
+            }
+        }, {
+            "id": "3",
+            "title": {
+                "en": "Extract only"
+            }
+        }
+    ],
+    "getable": true,
+    "setable": true,
+    "uiComponent": "picker",
+    "uiQuickAction": false,
+    "insights": false
+}

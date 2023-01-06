@@ -1,6 +1,8 @@
 'use strict';
 
-const { Driver } = require('homey');
+const {
+  Driver
+} = require('homey');
 
 class ComfoConnectLanCDriver extends Driver {
 
@@ -18,16 +20,21 @@ class ComfoConnectLanCDriver extends Driver {
 
     const cardBoost = this.homey.flow.getActionCard('boost');
     cardBoost.registerRunListener(async (args, state) => {
-      this.log(`Boost: ${JSON.stringify(args)}, ${JSON.stringify(state)}`);  
+      this.log(`Boost: ${JSON.stringify(args)}, ${JSON.stringify(state)}`);
       this.homey.app.setBoost(args['period']);
     });
 
     const cardMode = this.homey.flow.getActionCard('change_mode');
     cardMode.registerRunListener(async (args, state) => {
-      this.log(`Mode: ${JSON.stringify(args)}, ${JSON.stringify(state)}`);  
+      this.log(`Mode: ${JSON.stringify(args)}, ${JSON.stringify(state)}`);
       this.homey.app.setOperatingMode(args['mode']);
     });
 
+    const cardChangeVentMode = this.homey.flow.getActionCard('change_ventilation_mode');
+    cardChangeVentMode.registerRunListener(async (args, state) => {
+      this.log(`Ventilation mode: ${JSON.stringify(args)}, ${JSON.stringify(state)}`);
+      this.homey.app.setVentilationMode(args['vent_mode']);
+    });
   }
 
   /**
@@ -40,11 +47,11 @@ class ComfoConnectLanCDriver extends Driver {
       await this.homey.app.activate();
       const bridge = await this.homey.app.getInfo();
       return [bridge];
-    } catch (err)  {      
+    } catch (err) {
       this.log(`Error in onPairListDevices(): ${err.message}`);
     }
     return [];
-    
+
   }
 
 }

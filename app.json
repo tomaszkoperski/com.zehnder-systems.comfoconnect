@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.zehnder-systems.comfoconnect",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "platforms": [
@@ -148,6 +148,44 @@
           }
         ],
         "id": "change_speed"
+      },
+      {
+        "title": {
+          "en": "Set ventilation mode"
+        },
+        "titleFormatted": {
+          "en": "Set ventilation mode to [[vent_mode]]"
+        },
+        "hint": {
+          "en": "Sets the ventilation to specified mode."
+        },
+        "args": [
+          {
+            "name": "vent_mode",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "1",
+                "label": {
+                  "en": "Balance"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "Supply only"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "Extract only"
+                }
+              }
+            ]
+          }
+        ],
+        "id": "change_ventilation_mode"
       }
     ],
     "triggers": [
@@ -476,37 +514,6 @@
               "hint": {
                 "en": "Set the heat recovery control of the bypass functionality.\nAuto: the unit will control the heat recovery control automatically; (default setting)\nActivated: the unit will decrease the heat recovery control to a minimum (if possible outdoor air is supplied directly into the dwelling);\nDeactivated: the unit will increase the heat recovery control to a maximum."
               }
-            },
-            {
-              "id": "vent_mode",
-              "type": "dropdown",
-              "value": "balance",
-              "label": {
-                "en": "Ventilation mode"
-              },
-              "values": [
-                {
-                  "id": "balance",
-                  "label": {
-                    "en": "Balance"
-                  }
-                },
-                {
-                  "id": "supply",
-                  "label": {
-                    "en": "Supply only"
-                  }
-                },
-                {
-                  "id": "extract",
-                  "label": {
-                    "en": "Extract only"
-                  }
-                }
-              ],
-              "hint": {
-                "en": "Balance will start both supply and extract fan."
-              }
             }
           ]
         }
@@ -656,6 +663,37 @@
           "id": "-1",
           "title": {
             "en": "Auto"
+          }
+        }
+      ],
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "uiQuickAction": false,
+      "insights": false
+    },
+    "ventilation_mode": {
+      "type": "enum",
+      "title": {
+        "en": "Ventilation mode"
+      },
+      "values": [
+        {
+          "id": "1",
+          "title": {
+            "en": "Balance"
+          }
+        },
+        {
+          "id": "2",
+          "title": {
+            "en": "Supply only"
+          }
+        },
+        {
+          "id": "3",
+          "title": {
+            "en": "Extract only"
           }
         }
       ],

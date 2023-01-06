@@ -16,5 +16,8 @@
   },
   "1.1.0": {
     "en": "Added airflow measurement capabilities"
+  },
+  "1.2.0": {
+    "en": "Added better handling for the ventilation mode"
   }
 }

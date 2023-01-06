@@ -1,0 +1,22 @@
+{
+    "title": {
+      "en": "Set ventilation mode"
+    },
+    "titleFormatted": {
+      "en": "Set ventilation mode to [[vent_mode]]"
+    },
+    "hint": {
+      "en": "Sets the ventilation to specified mode."
+    },
+    "args": [
+      {
+        "name": "vent_mode",
+        "type": "dropdown",
+        "values": [
+          { "id": "1", "label": { "en": "Balance" } },
+          { "id": "2", "label": { "en": "Supply only" } },
+          { "id": "3", "label": { "en": "Extract only" } }
+        ]
+      }
+    ]
+}

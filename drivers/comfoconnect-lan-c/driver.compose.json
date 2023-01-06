@@ -167,37 +167,6 @@
           "hint": {
             "en": "Set the heat recovery control of the bypass functionality.\nAuto: the unit will control the heat recovery control automatically; (default setting)\nActivated: the unit will decrease the heat recovery control to a minimum (if possible outdoor air is supplied directly into the dwelling);\nDeactivated: the unit will increase the heat recovery control to a maximum."
           }
-        },
-        {
-          "id": "vent_mode",
-          "type": "dropdown",
-          "value": "balance",
-          "label": {
-            "en": "Ventilation mode"
-          },
-          "values": [
-            {
-              "id": "balance",
-              "label": {
-                "en": "Balance"
-              }
-            },
-            {
-              "id": "supply",
-              "label": {
-                "en": "Supply only"
-              }
-            },
-            {
-              "id": "extract",
-              "label": {
-                "en": "Extract only"
-              }
-            }
-          ],
-          "hint": {
-            "en": "Balance will start both supply and extract fan."
-          }
         }
       ]
     }
