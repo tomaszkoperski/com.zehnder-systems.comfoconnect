@@ -47,8 +47,23 @@ class ComfoConnectLanC extends Device {
       this.homey.app.setVentilationMode(value);
     });
 
-    //await this.__updateDevice();
+    this.homey.flow.getConditionCard('supply_temperature_is').registerRunListener(async (args, state) => {
+      return this.getCapabilityValue('measure_temperature.supply') > args.degrees;
+    });
 
+    this.homey.flow.getConditionCard('extract_temperature_is').registerRunListener(async (args, state) => {
+      return this.getCapabilityValue('measure_temperature.extract') > args.degrees;
+    });
+
+    this.homey.flow.getConditionCard('outdoor_temperature_is').registerRunListener(async (args, state) => {
+      return this.getCapabilityValue('measure_temperature.outdoor') > args.degrees;
+    });
+
+    this.homey.flow.getConditionCard('exhaust_temperature_is').registerRunListener(async (args, state) => {
+      return this.getCapabilityValue('measure_temperature.exhaust') > args.degrees;
+    });
+
+    // await this.__updateDevice();
   }
 
   /**
