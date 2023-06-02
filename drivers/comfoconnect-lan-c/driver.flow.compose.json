@@ -127,5 +127,83 @@
         }
       ]
     }
+  ],
+  "conditions": [
+    {
+      "id": "supply_temperature_is_higher_than",
+      "title": {
+        "en": "Supply temperature is !{{higher|lower}} than ..."
+      },
+      "titleFormatted": {
+        "en": "Supply temperature is !{{higher|lower}} than [[degrees]] degrees"
+      },
+      "args": [
+        {
+          "type": "number",
+          "name": "degrees",
+          "placeholder": {
+            "en": "20"
+          },
+          "step": 0.1
+        }
+      ]
+    },
+    {
+      "id": "extract_temperature_is_higher_than",
+      "title": {
+        "en": "Extract temperature is !{{higher|lower}} than ..."
+      },
+      "titleFormatted": {
+        "en": "Extract temperature is !{{higher|lower}} than [[degrees]] degrees"
+      },
+      "args": [
+        {
+          "type": "number",
+          "name": "degrees",
+          "placeholder": {
+            "en": "20"
+          },
+          "step": 0.1
+        }
+      ]
+    },
+    {
+      "id": "outdoor_temperature_is_higher_than",
+      "title": {
+        "en": "Outdoor temperature is !{{higher|lower}} than ..."
+      },
+      "titleFormatted": {
+        "en": "Outdoor temperature is !{{higher|lower}} than [[degrees]] degrees"
+      },
+      "args": [
+        {
+          "type": "number",
+          "name": "degrees",
+          "placeholder": {
+            "en": "20"
+          },
+          "step": 0.1
+        }
+      ]
+    },
+    {
+      "id": "exhaust_temperature_is_higher_than",
+      "title": {
+        "en": "Exhaust temperature is !{{higher|lower}} than ..."
+      },
+      "titleFormatted": {
+        "en": "Exhaust temperature is !{{higher|lower}} than [[degrees]] degrees"
+      },
+      "args": [
+        {
+          "type": "number",
+          "name": "degrees",
+          "placeholder": {
+            "en": "20"
+          },
+          "step": 0.1
+        }
+      ]
+    }
   ]
 }
