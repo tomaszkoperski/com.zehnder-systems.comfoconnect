@@ -1,7 +1,7 @@
 'use strict';
 
 const {
-  Device
+  Device,
 } = require('homey');
 
 class ComfoConnectLanC extends Device {
@@ -13,8 +13,8 @@ class ComfoConnectLanC extends Device {
     this.log('ComfoConnect LAN C has been initialized');
     this.homey.app.activate();
 
-    //Check capabilities, add missing ones
-    for (var capability of this.getCapabilities()) {
+    // Check capabilities, add missing ones
+    for (const capability of this.getCapabilities()) {
       this.log(`Found capability: ${capability}`);
 
       // Added in v1.1.0 It is safe to add them forcefully.
@@ -29,7 +29,6 @@ class ComfoConnectLanC extends Device {
       if (!this.hasCapability('ventilation_mode')) {
         this.addCapability('ventilation_mode');
       }
-
     }
 
     this.registerCapabilityListener('fan_speed_mode', async (value) => {
@@ -71,7 +70,7 @@ class ComfoConnectLanC extends Device {
    */
   async onAdded() {
     this.log('ComfoConnect LAN C has been added');
-    //this.__updateDevice();
+    // this.__updateDevice();
   }
 
   /**
@@ -85,16 +84,15 @@ class ComfoConnectLanC extends Device {
   async onSettings({
     oldSettings,
     newSettings,
-    changedKeys
+    changedKeys,
   }) {
-
     try {
       this.log('ComfoConnect LAN C settings where changed');
 
       this.log(`ChangedKeys: ${JSON.stringify(changedKeys)}`);
 
       for (const key of changedKeys) {
-        if (key == "bypass") {
+        if (key === 'bypass') {
           this.log(`Changing vent mode to ${newSettings.bypass}`);
           switch (newSettings.bypass) {
             case 'auto':
@@ -110,7 +108,7 @@ class ComfoConnectLanC extends Device {
           }
         }
 
-        if (key == "temp_profile") {
+        if (key === 'temp_profile') {
           this.log(`Changing vent mode to ${newSettings.temp_profile}`);
           switch (newSettings.temp_profile) {
             case 'warm':
@@ -127,12 +125,10 @@ class ComfoConnectLanC extends Device {
         }
 
         this.__updateDevice();
-
       }
     } catch (err) {
       this.log(`Error when updating settings: ${err.message}`);
     }
-
   }
 
   /**
@@ -176,13 +172,13 @@ class ComfoConnectLanC extends Device {
       this.setCapabilityValueLog('measure_airflow.supply', r.SENSOR_FAN_SUPPLY_FLOW);
       this.setCapabilityValueLog('measure_airflow.exhaust', r.SENSOR_FAN_EXHAUST_FLOW);
 
-      let vent_mode = 1; //Balance
-      if (r.SENSOR_FAN_MODE_SUPPLY == 1){
-        vent_mode = 2; //Supply only
-      } else if (r.SENSOR_FAN_MODE_EXHAUST == 1) {
-        vent_mode = 3; //Extract only
+      let ventMode = 1; // Balance
+      if (r.SENSOR_FAN_MODE_SUPPLY === 1) {
+        ventMode = 2; // Supply only
+      } else if (r.SENSOR_FAN_MODE_EXHAUST === 1) {
+        ventMode = 3; // Extract only
       }
-      this.setCapabilityValueLog('ventilation_mode', vent_mode.toString())
+      this.setCapabilityValueLog('ventilation_mode', ventMode.toString());
 
       this.setAvailable();
     } catch (err) {
