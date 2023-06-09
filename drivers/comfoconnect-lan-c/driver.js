@@ -1,7 +1,7 @@
 'use strict';
 
 const {
-  Driver
+  Driver,
 } = require('homey');
 
 class ComfoConnectLanCDriver extends Driver {
@@ -51,7 +51,6 @@ class ComfoConnectLanCDriver extends Driver {
       this.log(`Error in onPairListDevices(): ${err.message}`);
     }
     return [];
-
   }
 
 }
