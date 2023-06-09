@@ -19,5 +19,8 @@
   },
   "1.2.0": {
     "en": "Added better handling for the ventilation mode"
+  },
+  "1.3.0": {
+    "en": "Added temperature-based flow conditions (thanks @jenssegers)"
   }
 }
