@@ -149,7 +149,7 @@ class ComfoConnectLanC extends Device {
    */
   async onDeleted() {
     this.log('ComfoConnect LAN C has been deleted');
-    this.homey.app.disconnect();
+    await this.homey.app.disconnect();
   }
 
   async __updateDevice() {
