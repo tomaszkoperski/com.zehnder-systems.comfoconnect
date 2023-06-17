@@ -68,11 +68,10 @@ class ComfoConnectApp extends Homey.App {
       // to fix that we're doing a Promise race here to abort and potentially destroy the bridge if this hangs
       await Promise.race([
         this.bridge.discover(),
-        new Promise((resolve) => setTimeout(resolve, 10000)),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('Connection timeout')), 10000)),
       ]);
 
       if (this.bridge._bridge.isdiscovered !== true) {
-        this.bridge = null;
         delete this.bridge;
         throw new Error('Unable to discover the bridge');
       }
@@ -88,8 +87,6 @@ class ComfoConnectApp extends Homey.App {
       }
 
       this.enableSensors();
-
-      // this.log(this.bridge);
 
       this.bridge.on('receive', (data) => {
         this.log(`Received: ${JSON.stringify(data)}`);
@@ -168,7 +165,7 @@ class ComfoConnectApp extends Homey.App {
   }
 
   async getInfo() {
-    if (typeof this.bridge.settings.comfouuid !== 'undefined') {
+    if (this.bridge?.settings?.comfouuid !== undefined) {
       const device = {
         name: 'ComfoConnect LAN C',
         data: {
@@ -195,7 +192,7 @@ class ComfoConnectApp extends Homey.App {
       }
       this.bridge.KeepAlive();
       this.pushReadings();
-      this.homey.setTimeout(this.keepAlive, 8000);
+      this.homey.setTimeout(() => this.keepAlive(), 8000);
     } catch (err) {
       this.log(`Error in keepAlive: ${err.message}`);
     }
@@ -229,7 +226,7 @@ class ComfoConnectApp extends Homey.App {
       this.enableSensors();
       // sometimes, immediately after reconnecting, the device can push 0s for all values.
       // a not-to-elegant way to solve is just wait for it to settle down
-      this.homey.setTimeout(this.keepAlive, 20000);
+      this.homey.setTimeout(() => this.keepAlive(), 20000);
     } catch (err) {
       this.log(`Unable to restartSession: ${err.message}`);
     }
