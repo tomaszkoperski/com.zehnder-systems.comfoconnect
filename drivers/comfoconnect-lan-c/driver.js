@@ -45,7 +45,7 @@ class ComfoConnectLanCDriver extends Driver {
   async onPairListDevices() {
     try {
       await this.homey.app.activate();
-      const bridge = this.homey.app.getInfo();
+      const bridge = await this.homey.app.getInfo();
       return [bridge];
     } catch (err) {
       this.log(`Error in onPairListDevices(): ${err.message}`);

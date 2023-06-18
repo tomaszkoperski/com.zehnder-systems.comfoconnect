@@ -66,10 +66,12 @@ class ComfoConnectApp extends Homey.App {
 
       // discover - this opens up a UDP socket which waits indefinitely for connection. If the IP was bad, this will permanently block the port.
       // to fix that we're doing a Promise race here to abort and potentially destroy the bridge if this hangs
-      await Promise.race([
-        this.bridge.discover(),
+      const discoveryResult = await Promise.race([
+        this.bridge.discover().then(() => 'Bridge discovered.'),
         new Promise((_, reject) => setTimeout(() => reject(new Error('Connection timeout')), 10000)),
       ]);
+
+      this.log(`Discovery result: ${discoveryResult}`);
 
       if (this.bridge._bridge.isdiscovered !== true) {
         delete this.bridge;
@@ -154,6 +156,7 @@ class ComfoConnectApp extends Homey.App {
   }
 
   async activate() {
+    this.log('Device activated, reconnecting to bridge in a few seconds...');
     this.reconnect = true;
     await this.connect();
   }
@@ -165,6 +168,7 @@ class ComfoConnectApp extends Homey.App {
   }
 
   async getInfo() {
+    this.log('Finding the bridge for pairing...');
     if (this.bridge?.settings?.comfouuid !== undefined) {
       const device = {
         name: 'ComfoConnect LAN C',
@@ -172,8 +176,10 @@ class ComfoConnectApp extends Homey.App {
           id: this.bridge.settings.comfouuid.toString('hex'),
         },
       };
+      this.log(`Found: ${device}`);
       return device;
     }
+    this.log('Unable to find the bridge for pairing');
     return null;
   }
 
@@ -192,7 +198,7 @@ class ComfoConnectApp extends Homey.App {
       }
       this.bridge.KeepAlive();
       this.pushReadings();
-      this.homey.setTimeout(() => this.keepAlive(), 8000);
+      this.homey.setTimeout(this.keepAlive, 8000);
     } catch (err) {
       this.log(`Error in keepAlive: ${err.message}`);
     }
@@ -226,7 +232,7 @@ class ComfoConnectApp extends Homey.App {
       this.enableSensors();
       // sometimes, immediately after reconnecting, the device can push 0s for all values.
       // a not-to-elegant way to solve is just wait for it to settle down
-      this.homey.setTimeout(() => this.keepAlive(), 20000);
+      this.homey.setTimeout(this.keepAlive, 20000);
     } catch (err) {
       this.log(`Unable to restartSession: ${err.message}`);
     }
