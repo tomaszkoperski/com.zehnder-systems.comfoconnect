@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.zehnder-systems.comfoconnect",
-  "version": "1.3.2",
+  "version": "1.4.1",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "platforms": [
@@ -74,11 +74,55 @@
                 "label": {
                   "en": "30 minutes"
                 }
+              },
+              {
+                "id": "0",
+                "label": {
+                  "en": "Off"
+                }
               }
             ]
           }
         ],
         "id": "boost"
+      },
+      {
+        "title": {
+          "en": "Change bypass mode"
+        },
+        "titleFormatted": {
+          "en": "Change bypass mode to [[bypass_mode]]"
+        },
+        "hint": {
+          "en": "Changes the bypass setting of the ventilation unit"
+        },
+        "args": [
+          {
+            "name": "bypass_mode",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "Auto"
+                }
+              },
+              {
+                "id": "1",
+                "label": {
+                  "en": "Activated"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "Deactivated"
+                }
+              }
+            ]
+          }
+        ],
+        "id": "change_bypass_mode"
       },
       {
         "title": {
@@ -349,6 +393,34 @@
             "filter": "driver_id=comfoconnect-lan-c"
           }
         ]
+      },
+      {
+        "id": "bypass_changed",
+        "title": {
+          "en": "Bypass state changed"
+        },
+        "hint": {
+          "en": "The bypass state has changed"
+        },
+        "tokens": [
+          {
+            "type": "number",
+            "name": "bypass_state",
+            "title": {
+              "en": "Bypass state"
+            },
+            "example": {
+              "en": "50"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=comfoconnect-lan-c"
+          }
+        ]
       }
     ],
     "conditions": [
@@ -447,6 +519,102 @@
             "step": 0.1
           }
         ]
+      },
+      {
+        "id": "supply_humidity_is_higher_than",
+        "title": {
+          "en": "Supply humidity is !{{higher|lower}} than ..."
+        },
+        "titleFormatted": {
+          "en": "Supply humidity is !{{higher|lower}} than [[percent]] percent"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=comfoconnect-lan-c"
+          },
+          {
+            "type": "number",
+            "name": "percent",
+            "placeholder": {
+              "en": "20"
+            },
+            "step": 0.1
+          }
+        ]
+      },
+      {
+        "id": "extract_humidity_is_higher_than",
+        "title": {
+          "en": "Extract humidity is !{{higher|lower}} than ..."
+        },
+        "titleFormatted": {
+          "en": "Extract humidity is !{{higher|lower}} than [[percent]] percent"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=comfoconnect-lan-c"
+          },
+          {
+            "type": "number",
+            "name": "percent",
+            "placeholder": {
+              "en": "20"
+            },
+            "step": 0.1
+          }
+        ]
+      },
+      {
+        "id": "outdoor_humidity_is_higher_than",
+        "title": {
+          "en": "Outdoor humidity is !{{higher|lower}} than ..."
+        },
+        "titleFormatted": {
+          "en": "Outdoor humidity is !{{higher|lower}} than [[percent]] percent"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=comfoconnect-lan-c"
+          },
+          {
+            "type": "number",
+            "name": "percent",
+            "placeholder": {
+              "en": "20"
+            },
+            "step": 0.1
+          }
+        ]
+      },
+      {
+        "id": "exhaust_humidity_is_higher_than",
+        "title": {
+          "en": "Exhaust humidity is !{{higher|lower}} than ..."
+        },
+        "titleFormatted": {
+          "en": "Exhaust humidity is !{{higher|lower}} than [[percent]] percent"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=comfoconnect-lan-c"
+          },
+          {
+            "type": "number",
+            "name": "percent",
+            "placeholder": {
+              "en": "20"
+            },
+            "step": 0.1
+          }
+        ]
       }
     ]
   },
@@ -460,8 +628,13 @@
         "measure_power",
         "fan_speed_mode",
         "operating_mode",
-        "fan_duty.supply",
-        "fan_duty.exhaust",
+        "fan_next_change",
+        "bypass_state",
+        "bypass_mode",
+        "measure_fan_duty.supply",
+        "measure_fan_duty.exhaust",
+        "measure_fan_speed.supply",
+        "measure_fan_speed.exhaust",
         "measure_temperature.outdoor",
         "measure_temperature.supply",
         "measure_temperature.extract",
@@ -478,14 +651,39 @@
         "measure_power": {
           "approximated": true
         },
-        "fan_duty.supply": {
+        "fan_next_change": {
+          "title": {
+            "en": "Fan level next change"
+          }
+        },
+        "bypass_state": {
+          "title": {
+            "en": "Bypass state"
+          }
+        },
+        "bypass_mode": {
+          "title": {
+            "en": "Bypass mode"
+          }
+        },
+        "measure_fan_duty.supply": {
           "title": {
             "en": "Supply fan duty"
           }
         },
-        "fan_duty.exhaust": {
+        "measure_fan_duty.exhaust": {
           "title": {
             "en": "Exhaust fan duty"
+          }
+        },
+        "measure_fan_speed.supply": {
+          "title": {
+            "en": "Supply fan speed"
+          }
+        },
+        "measure_fan_speed.exhaust": {
+          "title": {
+            "en": "Exhaust fan speed"
           }
         },
         "measure_temperature.supply": {
@@ -547,7 +745,6 @@
       ],
       "uiComponent": [
         "picker",
-        "picker",
         "sensor"
       ],
       "energy": {},
@@ -590,7 +787,7 @@
               }
             },
             {
-              "id": "bypass",
+              "id": "bypass_mode",
               "type": "dropdown",
               "value": "auto",
               "label": {
@@ -645,6 +842,103 @@
     }
   ],
   "capabilities": {
+    "boost": {
+      "type": "enum",
+      "title": {
+        "en": "Boost"
+      },
+      "values": [
+        {
+          "id": "0",
+          "title": {
+            "en": "Off"
+          }
+        },
+        {
+          "id": "1",
+          "title": {
+            "en": "10 minutes"
+          }
+        },
+        {
+          "id": "2",
+          "title": {
+            "en": "20 minutes"
+          }
+        },
+        {
+          "id": "3",
+          "title": {
+            "en": "30 minutes"
+          }
+        }
+      ],
+      "getable": false,
+      "setable": true,
+      "uiComponent": "picker",
+      "uiQuickAction": false,
+      "insights": false
+    },
+    "bypass": {
+      "type": "number",
+      "title": {
+        "en": "Bypass state"
+      },
+      "units": {
+        "en": "%"
+      },
+      "getable": true,
+      "setable": false,
+      "uiQuickAction": false,
+      "uiComponent": "sensor",
+      "insights": true,
+      "deprecated": true
+    },
+    "bypass_mode": {
+      "type": "enum",
+      "title": {
+        "en": "Bypass mode"
+      },
+      "values": [
+        {
+          "id": "0",
+          "title": {
+            "en": "Auto"
+          }
+        },
+        {
+          "id": "1",
+          "title": {
+            "en": "Activated"
+          }
+        },
+        {
+          "id": "2",
+          "title": {
+            "en": "Deactivated"
+          }
+        }
+      ],
+      "getable": true,
+      "setable": true,
+      "uiComponent": "sensor",
+      "uiQuickAction": false,
+      "insights": false
+    },
+    "bypass_state": {
+      "type": "number",
+      "title": {
+        "en": "Bypass state"
+      },
+      "units": {
+        "en": "%"
+      },
+      "getable": true,
+      "setable": false,
+      "uiQuickAction": false,
+      "uiComponent": "sensor",
+      "insights": true
+    },
     "days_to_replace_filter": {
       "type": "number",
       "title": {
@@ -671,6 +965,18 @@
       "setable": false,
       "uiComponent": "sensor",
       "uiQuickAction": false,
+      "insights": true,
+      "deprecated": true
+    },
+    "fan_next_change": {
+      "type": "string",
+      "title": {
+        "en": "Fan speed change delay"
+      },
+      "getable": true,
+      "setable": false,
+      "uiQuickAction": false,
+      "uiComponent": "sensor",
       "insights": false
     },
     "fan_speed_mode": {
@@ -707,7 +1013,7 @@
       "getable": true,
       "setable": true,
       "uiComponent": "picker",
-      "uiQuickAction": false,
+      "uiQuickAction": true,
       "insights": false
     },
     "measure_airflow": {
@@ -717,6 +1023,34 @@
       },
       "units": {
         "en": "m³/h"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "uiQuickAction": false,
+      "insights": true
+    },
+    "measure_fan_duty": {
+      "type": "number",
+      "title": {
+        "en": "Fan duty"
+      },
+      "units": {
+        "en": "%"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "uiQuickAction": false,
+      "insights": true
+    },
+    "measure_fan_speed": {
+      "type": "number",
+      "title": {
+        "en": "Fan speed"
+      },
+      "units": {
+        "en": "rpm"
       },
       "getable": true,
       "setable": false,

@@ -28,5 +28,11 @@
   },
   "1.3.2": {
     "en": "Fixed an issue with adding new device"
+  },
+  "1.4.0": {
+    "en": "Added option to controll boost and bypass. Added fan speed measurements. Added fan speed next scheduled change information. Added ability to react to fan duty and speed in flows."
+  },
+  "1.4.1": {
+    "en": "Added option to controll boost and bypass mode. Added fan speed measurements. Added fan speed next scheduled change information. Added ability to react to fan duty and speed in flows."
   }
 }
