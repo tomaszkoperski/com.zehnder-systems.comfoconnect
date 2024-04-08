@@ -7,8 +7,13 @@
     "measure_power",
     "fan_speed_mode",
     "operating_mode",
-    "fan_duty.supply",
-    "fan_duty.exhaust",
+    "fan_next_change",
+    "bypass_state",
+    "bypass_mode",
+    "measure_fan_duty.supply",
+    "measure_fan_duty.exhaust",
+    "measure_fan_speed.supply",
+    "measure_fan_speed.exhaust",
     "measure_temperature.outdoor",
     "measure_temperature.supply",
     "measure_temperature.extract",
@@ -25,14 +30,39 @@
     "measure_power": {
       "approximated": true
     },
-    "fan_duty.supply": {
+    "fan_next_change": {
+      "title": {
+        "en": "Fan level next change"
+      }
+    },
+    "bypass_state": {
+      "title": {
+        "en": "Bypass state"
+      }
+    },
+    "bypass_mode": {
+      "title": {
+        "en": "Bypass mode"
+      }
+    },
+    "measure_fan_duty.supply": {
       "title": {
         "en": "Supply fan duty"
       }
     },
-    "fan_duty.exhaust": {
+    "measure_fan_duty.exhaust": {
       "title": {
         "en": "Exhaust fan duty"
+      }
+    },
+    "measure_fan_speed.supply": {
+      "title": {
+        "en": "Supply fan speed"
+      }      
+    },
+    "measure_fan_speed.exhaust": {
+      "title": {
+        "en": "Exhaust fan speed"
       }
     },
     "measure_temperature.supply": {
@@ -94,7 +124,6 @@
   ],
   "uiComponent": [
     "picker",
-    "picker",
     "sensor"
   ],
   "energy": {
@@ -138,7 +167,7 @@
           }
         },
         {
-          "id": "bypass",
+          "id": "bypass_mode",
           "type": "dropdown",
           "value": "auto",
           "label": {

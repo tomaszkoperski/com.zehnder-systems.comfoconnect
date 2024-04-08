@@ -1,15 +1,14 @@
 {
     "type": "number",
     "title": {
-        "en": "Fan duty"
+        "en": "Fan speed"
     },
     "units": {
-        "en": "%"
+        "en": "rpm"
     },
     "getable": true,
     "setable": false,
     "uiComponent": "sensor",
     "uiQuickAction": false,
-    "insights": true,
-    "deprecated": true
+    "insights": true
 }

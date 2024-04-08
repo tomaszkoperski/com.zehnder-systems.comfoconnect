@@ -1,15 +1,15 @@
 {
     "type": "number",
     "title": {
-        "en": "Fan duty"
+        "en": "Bypass state"
     },
     "units": {
         "en": "%"
     },
     "getable": true,
     "setable": false,
-    "uiComponent": "sensor",
     "uiQuickAction": false,
+    "uiComponent": "sensor",
     "insights": true,
     "deprecated": true
 }

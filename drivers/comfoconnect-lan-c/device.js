@@ -14,20 +14,24 @@ class ComfoConnectLanC extends Device {
     this.homey.app.activate();
 
     // Check capabilities, add missing ones
-    for (const capability of this.getCapabilities()) {
-      this.log(`Found capability: ${capability}`);
+    // for (const capability of this.getCapabilities()) {
+    //   this.log(`Found capability: ${capability}`);
+    // }
 
-      // Added in v1.1.0 It is safe to add them forcefully.
-      if (!this.hasCapability('measure_airflow.supply')) {
-        this.addCapability('measure_airflow.supply');
-      }
-      if (!this.hasCapability('measure_airflow.exhaust')) {
-        this.addCapability('measure_airflow.exhaust');
-      }
-
-      // Added in v1.2.0
-      if (!this.hasCapability('ventilation_mode')) {
-        this.addCapability('ventilation_mode');
+    const capabilitiesToAdd = [
+      'measure_airflow.supply', 'measure_airflow.exhaust', 'ventilation_mode',
+      'measure_fan_speed.supply', 'measure_fan_speed.exhaust',
+      'boost', 'fan_next_change', 'measure_fan_duty.supply', 'measure_fan_duty.exhaust',
+      'bypass_state', 'bypass_mode',
+    ];
+    for (const capability of capabilitiesToAdd) {
+      if (!this.hasCapability(capability)) {
+        try {
+          await this.addCapability(capability);
+          this.log(`Capability ${capability} added`);
+        } catch (err) {
+          this.error(`Error adding capability ${capability}: ${err.message}`);
+        }
       }
     }
 
@@ -41,9 +45,84 @@ class ComfoConnectLanC extends Device {
       this.homey.app.setOperatingMode(value);
     });
 
+    this.registerCapabilityListener('bypass_state', async (value) => {
+      this.log(`Setting bypass state to ${value}`);
+      this.homey.app.setBypass(value);
+    });
+
+    this.registerCapabilityListener('bypass_mode', async (value) => {
+      this.log(`Setting bypass mode to ${value}`);
+      await this.setSettings({ bypass_mode: value });
+    });
+
+    this.registerCapabilityListener('boost', async (value) => {
+      this.log(`Setting boost to ${value}`);
+      this.homey.app.setBoost(value);
+    });
+
     this.registerCapabilityListener('ventilation_mode', async (value) => {
       this.log(`Setting ventilation mode to ${value}`);
       this.homey.app.setVentilationMode(value);
+    });
+
+    this.registerCapabilityListener('fan_next_change', async (value) => {
+      this.log(`Fan level next change will happen in ${value}`);
+    });
+
+    this.registerCapabilityListener('measure_humidity.extract', async (value) => {
+      this.log(`Extract humidity set to ${value}`);
+    });
+
+    this.registerCapabilityListener('measure_temperature.extract', async (value) => {
+      this.log(`Extract temperature set to ${value}`);
+    });
+
+    this.registerCapabilityListener('measure_humidity.exhaust', async (value) => {
+      this.log(`Exhaust humidity set to ${value}`);
+    });
+
+    this.registerCapabilityListener('measure_temperature.exhaust', async (value) => {
+      this.log(`Exhaust temperature set to ${value}`);
+    });
+
+    this.registerCapabilityListener('measure_humidity.supply', async (value) => {
+      this.log(`Supply humidity set to ${value}`);
+    });
+
+    this.registerCapabilityListener('measure_temperature.supply', async (value) => {
+      this.log(`Supply temperature set to ${value}`);
+    });
+
+    this.registerCapabilityListener('measure_humidity.outdoor', async (value) => {
+      this.log(`Outdoor humidity set to ${value}`);
+    });
+
+    this.registerCapabilityListener('measure_temperature.outdoor', async (value) => {
+      this.log(`Outdoor temperature set to ${value}`);
+    });
+
+    this.registerCapabilityListener('measure_airflow.supply', async (value) => {
+      this.log(`Supply airflow set to ${value}`);
+    });
+
+    this.registerCapabilityListener('measure_airflow.exhaust', async (value) => {
+      this.log(`Extract airflow set to ${value}`);
+    });
+
+    this.registerCapabilityListener('measure_fan_speed.supply', async (value) => {
+      this.log(`Supply fan speed set to ${value}`);
+    });
+
+    this.registerCapabilityListener('measure_fan_speed.exhaust', async (value) => {
+      this.log(`Exhaust fan speed set to ${value}`);
+    });
+
+    this.registerCapabilityListener('measure_fan_duty.supply', async (value) => {
+      this.log(`Supply fan duty set to ${value}`);
+    });
+
+    this.registerCapabilityListener('measure_fan_duty.exhaust', async (value) => {
+      this.log(`Exhaust fan duty set to ${value}`);
     });
 
     this.homey.flow.getConditionCard('supply_temperature_is_higher_than').registerRunListener(async (args, state) => {
@@ -60,6 +139,42 @@ class ComfoConnectLanC extends Device {
 
     this.homey.flow.getConditionCard('exhaust_temperature_is_higher_than').registerRunListener(async (args, state) => {
       return this.getCapabilityValue('measure_temperature.exhaust') > args.degrees;
+    });
+
+    this.homey.flow.getConditionCard('supply_humidity_is_higher_than').registerRunListener(async (args, state) => {
+      return this.getCapabilityValue('measure_humidity.supply') > args.percent;
+    });
+
+    this.homey.flow.getConditionCard('extract_humidity_is_higher_than').registerRunListener(async (args, state) => {
+      return this.getCapabilityValue('measure_humidity.extract') > args.percent;
+    });
+
+    this.homey.flow.getConditionCard('outdoor_humidity_is_higher_than').registerRunListener(async (args, state) => {
+      return this.getCapabilityValue('measure_humidity.outdoor') > args.percent;
+    });
+
+    this.homey.flow.getConditionCard('exhaust_humidity_is_higher_than').registerRunListener(async (args, state) => {
+      return this.getCapabilityValue('measure_humidity.exhaust') > args.percent;
+    });
+
+    this.homey.flow.getConditionCard('bypass_state_is_higher_than').registerRunListener(async (args, state) => {
+      return this.getCapabilityValue('bypass_state') > args.percent;
+    });
+
+    this.homey.flow.getConditionCard('exhaust_fan_duty_is_higher_than').registerRunListener(async (args, state) => {
+      return this.getCapabilityValue('measure_fan_duty.exhaust') > args.percent;
+    });
+
+    this.homey.flow.getConditionCard('supply_fan_duty_is_higher_than').registerRunListener(async (args, state) => {
+      return this.getCapabilityValue('measure_fan_duty.supply') > args.percent;
+    });
+
+    this.homey.flow.getConditionCard('exhaust_fan_speed_is_higher_than').registerRunListener(async (args, state) => {
+      return this.getCapabilityValue('measure_fan_speed.exhaust') > args.speed;
+    });
+
+    this.homey.flow.getConditionCard('supply_fan_speed_is_higher_than').registerRunListener(async (args, state) => {
+      return this.getCapabilityValue('measure_fan_speed.supply') > args.speed;
     });
 
     // await this.__updateDevice();
@@ -92,17 +207,20 @@ class ComfoConnectLanC extends Device {
       this.log(`ChangedKeys: ${JSON.stringify(changedKeys)}`);
 
       for (const key of changedKeys) {
-        if (key === 'bypass') {
-          this.log(`Changing vent mode to ${newSettings.bypass}`);
-          switch (newSettings.bypass) {
+        if (key === 'bypass_mode') {
+          this.log(`Changing vent mode to ${newSettings.bypass_mode}`);
+          switch (newSettings.bypass_mode) {
             case 'auto':
               this.homey.app.sendCommand('BYPASS_AUTO');
+              this.setCapabilityValue('bypass_mode', '0');
               break;
             case 'on':
               this.homey.app.sendCommand('BYPASS_ON');
+              this.setCapabilityValue('bypass_mode', '1');
               break;
             case 'off':
               this.homey.app.sendCommand('BYPASS_OFF');
+              this.setCapabilityValue('bypass_mode', '2');
               break;
             default:
           }
@@ -152,9 +270,14 @@ class ComfoConnectLanC extends Device {
     this.log('Updating device...');
     try {
       const r = await this.homey.app.getReadings();
-      this.setCapabilityValueLog('fan_duty.exhaust', r.SENSOR_FAN_EXHAUST_DUTY);
-      this.setCapabilityValueLog('fan_duty.supply', r.SENSOR_FAN_SUPPLY_DUTY);
+      this.setCapabilityValueLog('measure_fan_duty.exhaust', r.SENSOR_FAN_EXHAUST_DUTY);
+      this.setCapabilityValueLog('measure_fan_duty.supply', r.SENSOR_FAN_SUPPLY_DUTY);
+      this.setCapabilityValueLog('fan_next_change', this.getTimeFormatted(r.SENSOR_FAN_NEXT_CHANGE));
+      this.setCapabilityValueLog('measure_fan_speed.exhaust', r.SENSOR_FAN_EXHAUST_SPEED);
+      this.setCapabilityValueLog('measure_fan_speed.supply', r.SENSOR_FAN_SUPPLY_SPEED);
       this.setCapabilityValueLog('measure_power', r.SENSOR_POWER_CURRENT);
+      this.setCapabilityValueLog('bypass_state', r.SENSOR_BYPASS_STATE);
+      this.setCapabilityValueLog('bypass_mode', r.SENSOR_BYPASS_ACTIVATION_MODE.toString());
       this.setCapabilityValueLog('fan_speed_mode', r.SENSOR_FAN_SPEED_MODE.toString());
       this.setCapabilityValueLog('operating_mode', r.SENSOR_OPERATING_MODE.toString());
       this.setCapabilityValueLog('days_to_replace_filter', r.SENSOR_DAYS_TO_REPLACE_FILTER);
@@ -188,12 +311,33 @@ class ComfoConnectLanC extends Device {
   }
 
   async setCapabilityValueLog(capability, value) {
-    this.log(`setCapability ${capability}: ${value}`);
+    this.log(`setCapability ${capability}: ${JSON.stringify(value)}`);
     try {
       await this.setCapabilityValue(capability, value);
     } catch (err) {
       this.log(`setCapabilityValueLog error ${capability} ${err.message}`);
     }
+  }
+
+  getTimeFormatted(value) {
+    if (value.length !== 4) {
+      return ('Not scheduled');
+    }
+    const totalSeconds = value[0] + value[1] * 256 + value[2] * 256 ** 2 + value[3] * 256 ** 3;
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    let formattedTime = '';
+    if (hours > 0) {
+      formattedTime += `${hours}h `;
+    }
+    if (minutes > 0) {
+      formattedTime += `${minutes}m `;
+    }
+    formattedTime += `${seconds}s`;
+
+    return formattedTime.trim();
   }
 
 }

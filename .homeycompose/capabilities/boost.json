@@ -1,35 +1,34 @@
 {
     "type": "enum",
     "title": {
-        "en": "Fan speed"
+        "en": "Boost"
     },
     "values": [
         {
+            "id": "0",
+            "title": {
+                "en": "Off"
+            }
+        },{
             "id": "1",
             "title": {
-                "en": "Low"
+                "en": "10 minutes"
             }
         }, {
             "id": "2",
             "title": {
-                "en": "Medium"
+                "en": "20 minutes"
             }
         }, {
             "id": "3",
             "title": {
-                "en": "High"
-            }
-        },
-        {
-            "id": "0",
-            "title": {
-                "en": "Away"
+                "en": "30 minutes"
             }
         }
     ],
-    "getable": true,
+    "getable": false,
     "setable": true,
     "uiComponent": "picker",
-    "uiQuickAction": true,
+    "uiQuickAction": false,
     "insights": false
 }

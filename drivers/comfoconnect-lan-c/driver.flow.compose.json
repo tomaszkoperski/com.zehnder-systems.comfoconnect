@@ -126,6 +126,26 @@
           }
         }
       ]
+    },
+    {
+      "id": "bypass_changed",
+      "title": {
+        "en": "Bypass state changed"
+      },
+      "hint": {
+        "en": "The bypass state has changed"
+      },
+      "tokens": [{
+          "type": "number",
+          "name": "bypass_state",
+          "title": {
+            "en": "Bypass state"
+          },
+          "example": {
+            "en": "50"
+          }
+        }
+      ]
     }
   ],
   "conditions": [
@@ -202,6 +222,177 @@
             "en": "20"
           },
           "step": 0.1
+        }
+      ]
+    },
+    {
+      "id": "supply_humidity_is_higher_than",
+      "title": {
+        "en": "Supply humidity is !{{higher|lower}} than ..."
+      },
+      "titleFormatted": {
+        "en": "Supply humidity is !{{higher|lower}} than [[percent]] percent"
+      },
+      "args": [
+        {
+          "type": "number",
+          "name": "percent",
+          "placeholder": {
+            "en": "20"
+          },
+          "step": 0.1
+        }
+      ]
+    },
+    {
+      "id": "extract_humidity_is_higher_than",
+      "title": {
+        "en": "Extract humidity is !{{higher|lower}} than ..."
+      },
+      "titleFormatted": {
+        "en": "Extract humidity is !{{higher|lower}} than [[percent]] percent"
+      },
+      "args": [
+        {
+          "type": "number",
+          "name": "percent",
+          "placeholder": {
+            "en": "20"
+          },
+          "step": 0.1
+        }
+      ]
+    },
+    {
+      "id": "outdoor_humidity_is_higher_than",
+      "title": {
+        "en": "Outdoor humidity is !{{higher|lower}} than ..."
+      },
+      "titleFormatted": {
+        "en": "Outdoor humidity is !{{higher|lower}} than [[percent]] percent"
+      },
+      "args": [
+        {
+          "type": "number",
+          "name": "percent",
+          "placeholder": {
+            "en": "20"
+          },
+          "step": 0.1
+        }
+      ]
+    },
+    {
+      "id": "exhaust_humidity_is_higher_than",
+      "title": {
+        "en": "Exhaust humidity is !{{higher|lower}} than ..."
+      },
+      "titleFormatted": {
+        "en": "Exhaust humidity is !{{higher|lower}} than [[percent]] percent"
+      },
+      "args": [
+        {
+          "type": "number",
+          "name": "percent",
+          "placeholder": {
+            "en": "20"
+          },
+          "step": 0.1
+        }
+      ]
+    },
+    {
+      "id": "bypass_state_is_higher_than",
+      "title": {
+        "en": "Bypas state is !{{higher|lower}} than ..."
+      },
+      "titleFormatted": {
+        "en": "Bypass state is !{{higher|lower}} than [[percent]] percent"
+      },
+      "args": [
+        {
+          "type": "number",
+          "name": "percent",
+          "placeholder": {
+            "en": "20"
+          },
+          "step": 1
+        }
+      ]
+    },
+    {
+      "id": "exhaust_fan_duty_is_higher_than",
+      "title": {
+        "en": "Exhaust fan duty is !{{higher|lower}} than ..."
+      },
+      "titleFormatted": {
+        "en": "Exhaust fan duty is !{{higher|lower}} than [[percent]] percent"
+      },
+      "args": [
+        {
+          "type": "number",
+          "name": "percent",
+          "placeholder": {
+            "en": "20"
+          },
+          "step": 1
+        }
+      ]
+    },
+    {
+      "id": "supply_fan_duty_is_higher_than",
+      "title": {
+        "en": "Supply fan duty is !{{higher|lower}} than ..."
+      },
+      "titleFormatted": {
+        "en": "Supply fan duty is !{{higher|lower}} than [[percent]] percent"
+      },
+      "args": [
+        {
+          "type": "number",
+          "name": "percent",
+          "placeholder": {
+            "en": "20"
+          },
+          "step": 1
+        }
+      ]
+    },
+    {
+      "id": "exhaust_fan_speed_is_higher_than",
+      "title": {
+        "en": "Exhaust fan speed is !{{higher|lower}} than ..."
+      },
+      "titleFormatted": {
+        "en": "Exhaust fan speed is !{{higher|lower}} than [[speed]] rpm"
+      },
+      "args": [
+        {
+          "type": "number",
+          "name": "speed",
+          "placeholder": {
+            "en": "1337"
+          },
+          "step": 1
+        }
+      ]
+    },
+    {
+      "id": "supply_fan_speed_is_higher_than",
+      "title": {
+        "en": "Supply fan speed is !{{higher|lower}} than ..."
+      },
+      "titleFormatted": {
+        "en": "Supply fan speed is !{{higher|lower}} than [[speed]] rpm"
+      },
+      "args": [
+        {
+          "type": "number",
+          "name": "speed",
+          "placeholder": {
+            "en": "1337"
+          },
+          "step": 1
         }
       ]
     }

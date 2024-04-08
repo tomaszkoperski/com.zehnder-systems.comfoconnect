@@ -1,0 +1,22 @@
+{
+    "title": {
+      "en": "Change bypass mode"
+    },
+    "titleFormatted": {
+      "en": "Change bypass mode to [[bypass_mode]]"
+    },
+    "hint": {
+      "en": "Changes the bypass setting of the ventilation unit"
+    },
+    "args": [
+      {
+        "name": "bypass_mode",
+        "type": "dropdown",
+        "values": [
+          { "id": "0", "label": { "en": "Auto" } },
+          { "id": "1", "label": { "en": "Activated" } },
+          { "id": "2", "label": { "en": "Deactivated" } }
+        ]
+      }
+    ]
+}

@@ -1,0 +1,29 @@
+{
+    "type": "enum",
+    "title": {
+        "en": "Bypass mode"
+    },
+    "values": [
+        {
+            "id": "0",
+            "title": {
+                "en": "Auto"
+            }
+        }, {
+            "id": "1",
+            "title": {
+                "en": "Activated"
+            }
+        }, {
+            "id": "2",
+            "title": {
+                "en": "Deactivated"
+            }
+        }
+    ],
+    "getable": true,
+    "setable": true,
+    "uiComponent": "sensor",
+    "uiQuickAction": false,
+    "insights": false
+}

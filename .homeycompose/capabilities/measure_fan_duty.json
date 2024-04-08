@@ -10,6 +10,5 @@
     "setable": false,
     "uiComponent": "sensor",
     "uiQuickAction": false,
-    "insights": true,
-    "deprecated": true
+    "insights": true
 }

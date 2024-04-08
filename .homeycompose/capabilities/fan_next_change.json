@@ -1,0 +1,11 @@
+{
+    "type": "string",
+    "title": {
+        "en": "Fan speed change delay"
+    },
+    "getable": true,
+    "setable": false,
+    "uiQuickAction": false,
+    "uiComponent": "sensor",
+    "insights": false
+}

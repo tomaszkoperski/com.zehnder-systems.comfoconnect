@@ -74,7 +74,7 @@ class ComfoConnectApp extends Homey.App {
       this.log(`Discovery result: ${discoveryResult}`);
 
       if (this.bridge._bridge.isdiscovered !== true) {
-        delete this.bridge;
+        this.bridge = null;
         throw new Error('Unable to discover the bridge');
       }
 
@@ -128,11 +128,11 @@ class ComfoConnectApp extends Homey.App {
   async enableSensors() {
     try {
       await this.bridge.RegisterSensor(67); // SENSOR_TEMPERATURE_PROFILE
-      // await this.bridge.RegisterSensor(121); // SENSOR_FAN_EXHAUST_SPEED
-      // await this.bridge.RegisterSensor(122); // SENSOR_FAN_SUPPLY_SPEED
+      await this.bridge.RegisterSensor(81); // SENSOR_FAN_NEXT_CHANGE
       await this.bridge.RegisterSensor(117); // SENSOR_FAN_EXHAUST_DUTY
       await this.bridge.RegisterSensor(118); // SENSOR_FAN_SUPPLY_DUTY
       await this.bridge.RegisterSensor(227); // SENSOR_BYPASS_STATE
+      await this.bridge.RegisterSensor(66); // SENSOR_BYPASS_ACTIVATION_MODE
       await this.bridge.RegisterSensor(221); // SENSOR_TEMPERATURE_SUPPLY
       await this.bridge.RegisterSensor(274); // SENSOR_TEMPERATURE_EXTRACT
       await this.bridge.RegisterSensor(275); // SENSOR_TEMPERATURE_EXHAUST
@@ -143,6 +143,8 @@ class ComfoConnectApp extends Homey.App {
       await this.bridge.RegisterSensor(294); // SENSOR_HUMIDITY_SUPPLY
       await this.bridge.RegisterSensor(119); // SENSOR_FAN_EXHAUST_FLOW
       await this.bridge.RegisterSensor(120); // SENSOR_FAN_SUPPLY_FLOW
+      await this.bridge.RegisterSensor(121); // SENSOR_FAN_EXHAUST_SPEED
+      await this.bridge.RegisterSensor(122); // SENSOR_FAN_SUPPLY_SPEED
       await this.bridge.RegisterSensor(128); // SENSOR_POWER_CURRENT
       await this.bridge.RegisterSensor(65); // SENSOR_FAN_SPEED_MODE
       await this.bridge.RegisterSensor(192); // SENSOR_DAYS_TO_REPLACE_FILTER
@@ -184,6 +186,7 @@ class ComfoConnectApp extends Homey.App {
   }
 
   async getReadings() {
+    // this.log(`Bridge status: ${JSON.stringify(this.bridgeStatus)}`);
     return this.bridgeStatus;
   }
 
@@ -311,6 +314,22 @@ class ComfoConnectApp extends Homey.App {
       case '3':
         this.sendCommand('VENTMODE_EXTRACT');
         this.sendCommand('VENTMODE_SUPPLY_OFF');
+        break;
+      default:
+    }
+  }
+
+  setBypass(value) {
+    this.log(`Setting bypass mode to ${value}`);
+    switch (value) {
+      case '0':
+        this.sendCommand('BYPASS_AUTO');
+        break;
+      case '1':
+        this.sendCommand('BYPASS_ON');
+        break;
+      case '2':
+        this.sendCommand('BYPASS_OFF');
         break;
       default:
     }
