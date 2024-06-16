@@ -40,5 +40,8 @@
   },
   "1.4.4": {
     "en": "Added option to controll boost and bypass mode from app and flows. Added fan speed measurement capabilities. Added bypass mode information. Added fan speed next scheduled change countdown. Added ability to react to fan duty, fan speed and bypass state in flows."
+  },
+  "1.4.5": {
+    "en": "Added flow condition that checks remaining days to replace filter"
   }
 }
