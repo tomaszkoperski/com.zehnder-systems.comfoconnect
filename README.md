@@ -26,7 +26,7 @@ See [Issue Tracker](https://github.com/tomaszkoperski/com.zehnder-systems.comfoc
 
 ## Change Log
 
-### v1.5.0 (2024-10-20)
+### v1.5.1 (2024-10-20)
 Better connection handling, cleanup, added days to replace filter handling (Tomasz Koperski)
 
 ### v1.4.5 (2024-06-16)
