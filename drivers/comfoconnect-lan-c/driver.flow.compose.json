@@ -395,6 +395,25 @@
           "step": 1
         }
       ]
+    },
+    {
+      "id": "days_to_replace_filter_is_higher_than",
+      "title": {
+        "en": "Days to replace filter is !{{higher|lower}} than ..."
+      },
+      "titleFormatted": {
+        "en": "Days to replace filter is !{{higher|lower}} than [[days]] days"
+      },
+      "args": [
+        {
+          "type": "number",
+          "name": "days",
+          "placeholder": {
+            "en": "1"
+          },
+          "step": 1
+        }
+      ]
     }
   ]
 }

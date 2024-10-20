@@ -25,7 +25,46 @@ See [Issue Tracker](https://github.com/tomaszkoperski/com.zehnder-systems.comfoc
   * `homey app install` to drop a production build onto your Homey PRO.
 
 ## Change Log
-* **1.0.0** Initial release (2022-07-31).
+
+### v1.5.0 (2024-10-20)
+Better connection handling, cleanup, added days to replace filter handling (Tomasz Koperski)
+
+### v1.4.5 (2024-06-16)
+Minor fixes (Tomasz Koperski)
+
+### v1.4.1 (2024-04-09)
+Added option to control boost and bypass mode from app and flows. Added fan speed measurement capabilities. Added bypass mode information. Added fan speed next scheduled change countdown. Added ability to react to fan duty, fan speed and bypass state in flows. (Tomasz Koperski)
+
+### v1.3.2 (2023-06-18)
+Added more logging to help with debugging issues. Fixed sync issue when adding the LanC device (Tomasz Koperski)
+
+### v1.3.1 (2023-06-17)
+Better handling in promise race and keepAlives (Tomasz Koperski)
+
+### v1.3.0 (2023-06-09)
+Fix disconnect sync (Tomasz Koperski)
+
+### v1.2.0 (2023-06-05)
+Remove unused packages (Jens Segers)
+Apply linting (Jens Segers)
+Add Homey dev dependency (Jens Segers)
+
+### v1.1.0 (2023-01-06)
+Better handling and flow card for the ventilation mode (Tomasz Koperski)
+Added airflow measurement capabilities. Attempted fix for occasional null readings, which polluted insights (Tomasz Koperski)
+
+### v1.0.4 (2022-09-17)
+Fixed mode change flow card (Tomasz Koperski)
+
+### v1.0.2 (2022-08-04)
+Added info to restart the app after changing the gateway IP address or PIN. (Tomasz Koperski)
+Fixed issue with empty config causing app crash, minor fixes. (Tomasz Koperski)
+
+### v1.0.1 (2022-08-04)
+Minor fixes
+
+### v1.0.0 (2022-07-31)
+Initial release
 
 ## Feedback
 

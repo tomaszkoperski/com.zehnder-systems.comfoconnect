@@ -53,75 +53,106 @@ class ComfoConnectApp extends Homey.App {
   }
 
   async connect() {
-    try {
-      this.log('Connecting...');
-      if (!this.bridgeSettings.comfoair || !this.bridgeSettings.pin) {
-        throw new Error('ComfoConnect module not configured. Check config in app settings.');
-      }
+    const initialTimeout = 10000; // Początkowe opóźnienie 1 sekunda
+    let attempts = 0;
 
-      this.log(`Bridge settings: ${JSON.stringify(this.bridgeSettings)}`);
-
-      // create bridge
-      this.bridge = new ComfoAirQ(this.bridgeSettings);
-
-      // discover - this opens up a UDP socket which waits indefinitely for connection. If the IP was bad, this will permanently block the port.
-      // to fix that we're doing a Promise race here to abort and potentially destroy the bridge if this hangs
-      const discoveryResult = await Promise.race([
-        this.bridge.discover().then(() => 'Bridge discovered.'),
-        new Promise((_, reject) => setTimeout(() => reject(new Error('Connection timeout')), 10000)),
-      ]);
-
-      this.log(`Discovery result: ${discoveryResult}`);
-
-      if (this.bridge._bridge.isdiscovered !== true) {
-        this.bridge = null;
-        throw new Error('Unable to discover the bridge');
-      }
-
-      if (this.registered === false) {
-        await this.bridge.RegisterApp();
-        this.log('Registering the app...');
-      }
-
-      if (this.connected === false) {
-        this.bridge.StartSession(true);
-        this.log('Starting session...');
-      }
-
-      this.enableSensors();
-
-      this.bridge.on('receive', (data) => {
-        this.log(`Received: ${JSON.stringify(data)}`);
-        switch (data.result.kind) {
-          case 'RegisterAppConfirm':
-            this.registered = true;
-            this.log('App registered successfully in ComfoConnect LAN C');
-            break;
-          case 'StartSessionConfirm':
-            this.connected = true;
-            this.log('An active connection was established with the ConfoConnect LAN C');
-            break;
-          case 'CnRpdoNotification':
-            this.bridgeStatus[data.result.data.name] = data.result.data.data;
-            break;
-          default:
+    while (true) {
+      try {
+        this.log('Connecting...');
+        if (!this.bridgeSettings.comfoair || !this.bridgeSettings.pin) {
+          throw new Error('ComfoConnect module not configured. Check config in app settings.');
         }
-      });
 
-      this.bridge.on('disconnect', (reason) => {
-        if (reason.state === 'OTHER_SESSION') {
-          this.log('other device became active');
-          this.reconnect = true;
+        this.log(`Bridge settings: ${JSON.stringify(this.bridgeSettings)}`);
+
+        // create bridge
+        try {
+          this.bridge = new ComfoAirQ(this.bridgeSettings);
+        } catch (err) {
+          this.log(`Error creating bridge: ${err.message}`);
+          throw err;
         }
+
+        // discover - this opens up a UDP socket which waits indefinitely for connection. If the IP was bad, this will permanently block the port.
+        // to fix that we're doing a Promise race here to abort and potentially destroy the bridge if this hangs
+        let discoveryResult;
+        try {
+          discoveryResult = await Promise.race([
+            this.bridge.discover().then(() => 'Bridge discovered.'),
+            new Promise((_, reject) => setTimeout(() => reject(new Error('Connection timeout')), initialTimeout * (2 ** attempts))),
+          ]);
+        } catch (err) {
+          this.log(`Discovery error: ${err.message}`);
+          throw err;
+        }
+
+        this.log(`Discovery result: ${discoveryResult}`);
+
+        if (this.bridge._bridge.isdiscovered !== true) {
+          this.bridge = null;
+          throw new Error('Unable to discover the bridge');
+        }
+
+        if (this.registered === false) {
+          try {
+            await this.bridge.RegisterApp();
+            this.log('Registering the app...');
+          } catch (err) {
+            this.log(`Error registering app: ${err.message}`);
+            throw err;
+          }
+        }
+
+        if (this.connected === false) {
+          try {
+            this.bridge.StartSession(true);
+            this.log('Starting session...');
+          } catch (err) {
+            this.connected = false;
+            this.reconnect = true;
+            this.log(`Error starting session: ${err.message}`);
+            throw err;
+          }
+        }
+
+        this.enableSensors();
+
+        this.bridge.on('receive', (data) => {
+          this.log(`Received: ${JSON.stringify(data)}`);
+          switch (data.result.kind) {
+            case 'RegisterAppConfirm':
+              this.registered = true;
+              this.log('App registered successfully in ComfoConnect LAN C');
+              break;
+            case 'StartSessionConfirm':
+              this.connected = true;
+              this.log('An active connection was established with the ConfoConnect LAN C');
+              break;
+            case 'CnRpdoNotification':
+              this.bridgeStatus[data.result.data.name] = data.result.data.data;
+              break;
+            default:
+          }
+        });
+
+        this.bridge.on('disconnect', (reason) => {
+          if (reason.state === 'OTHER_SESSION') {
+            this.log('other device became active');
+            this.reconnect = true;
+          }
+          this.connected = false;
+        });
+        this.homey.setTimeout(this.keepAlive, 8000);
+        return true;
+      } catch (err) {
+        this.log(`Error when connecting: ${err.message}`);
         this.connected = false;
-      });
-
-      this.homey.setTimeout(this.keepAlive, 8000);
-      return true;
-    } catch (err) {
-      this.log(`Error when connecting: ${err.message}`);
-      this.connected = false;
-      return false;
+        attempts++;
+        const maxBackoffTime = 600000;
+        const backoffTime = Math.min(initialTimeout * (2 ** attempts), maxBackoffTime);
+        this.log(`Retrying connection in ${backoffTime / 1000} seconds...`);
+        await new Promise((resolve) => setTimeout(resolve, backoffTime));
+      }
     }
   }
 
@@ -165,8 +196,12 @@ class ComfoConnectApp extends Homey.App {
 
   async disconnect() {
     this.reconnect = false;
-    await this.bridge.CloseSession();
     this.connected = false;
+    try {
+      await this.bridge.CloseSession();
+    } catch (err) {
+      this.log(`Error when disconnecting: ${err.message}`);
+    }
   }
 
   async getInfo() {
@@ -232,11 +267,14 @@ class ComfoConnectApp extends Homey.App {
   restartSession() {
     try {
       this.bridge.StartSession(false);
+      this.connected = true;
       this.enableSensors();
       // sometimes, immediately after reconnecting, the device can push 0s for all values.
       // a not-to-elegant way to solve is just wait for it to settle down
       this.homey.setTimeout(this.keepAlive, 20000);
     } catch (err) {
+      this.connected = false;
+      this.reconnect = true;
       this.log(`Unable to restartSession: ${err.message}`);
     }
   }
@@ -245,6 +283,8 @@ class ComfoConnectApp extends Homey.App {
     try {
       this.bridge.SendCommand(1, command);
     } catch (err) {
+      this.connected = false;
+      this.reconnect = true;
       this.log(`Unable to sendCommand: ${err.message}`);
     }
   }

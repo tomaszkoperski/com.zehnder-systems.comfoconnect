@@ -177,6 +177,10 @@ class ComfoConnectLanC extends Device {
       return this.getCapabilityValue('measure_fan_speed.supply') > args.speed;
     });
 
+    this.homey.flow.getConditionCard('days_to_replace_filter_is_higher_than').registerRunListener(async (args, state) => {
+      return this.getCapabilityValue('days_to_replace_filter') > args.days;
+    });
+
     // await this.__updateDevice();
   }
 

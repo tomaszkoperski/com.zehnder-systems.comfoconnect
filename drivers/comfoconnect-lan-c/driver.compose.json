@@ -114,6 +114,11 @@
       "title": {
         "en": "Exhaust airflow"
       }
+    },
+    "days_to_replace_filter": {
+      "title": {
+        "en": "Days to replace filter"
+      }
     }
   },
   "platforms": [

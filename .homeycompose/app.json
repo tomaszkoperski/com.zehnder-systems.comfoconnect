@@ -1,6 +1,6 @@
 {
   "id": "com.zehnder-systems.comfoconnect",
-  "version": "1.4.5",
+  "version": "1.5.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "platforms": [
@@ -38,5 +38,10 @@
         "name": "https://github.com/jenssegers"
       }
     ]
+  },
+  "contributing": {
+    "paypal": {
+      "username": "kpr31337"
+    }
   }
 }
