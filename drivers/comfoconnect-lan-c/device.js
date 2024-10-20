@@ -11,14 +11,16 @@ class ComfoConnectLanC extends Device {
    */
   async onInit() {
     this.log('ComfoConnect LAN C has been initialized');
-    this.homey.app.activate();
 
     const capabilitiesToAdd = [
       'measure_airflow.supply', 'measure_airflow.exhaust', 'ventilation_mode',
       'measure_fan_speed.supply', 'measure_fan_speed.exhaust',
       'boost', 'fan_next_change', 'measure_fan_duty.supply', 'measure_fan_duty.exhaust',
       'bypass_state', 'bypass_mode', 'temperature_profile', 'operating_mode', 'fan_speed_mode',
+      'measure_avoided.heating', 'measure_avoided.heating_total', 'measure_avoided.cooling', 'measure_avoided.cooling_total',
+      'measure_rmot',
     ];
+
     for (const capability of capabilitiesToAdd) {
       if (!this.hasCapability(capability)) {
         try {
@@ -28,7 +30,14 @@ class ComfoConnectLanC extends Device {
           this.error(`Error adding capability ${capability}: ${err.message}`);
         }
       }
+      const lastKnownValue = await this.getStoreValue(capability);
+      if (lastKnownValue !== null) {
+        this.setCapabilityValue(capability, lastKnownValue)
+          .catch((err) => this.log(`Error setting capability ${capability}: ${err.message}`));
+      }
     }
+
+    await this.homey.app.activate();
 
     this.registerCapabilityListener('fan_speed_mode', async (value) => {
       this.log(`Setting fan mode to ${value}`);
@@ -46,7 +55,7 @@ class ComfoConnectLanC extends Device {
 
     this.registerCapabilityListener('bypass_mode', async (value) => {
       this.log(`Setting bypass mode to ${value}`);
-      await this.setBypassMode(value);
+      await this.homey.app.setBypassMode(value);
     });
 
     this.registerCapabilityListener('boost', async (value) => {
@@ -124,6 +133,26 @@ class ComfoConnectLanC extends Device {
       this.log(`Exhaust fan duty set to ${value}`);
     });
 
+    this.registerCapabilityListener('measure_avoided.heating', async (value) => {
+      this.log(`Avoided hearing current set to ${value}`);
+    });
+
+    this.registerCapabilityListener('measure_avoided.cooling', async (value) => {
+      this.log(`Avoided cooling current set to ${value}`);
+    });
+
+    this.registerCapabilityListener('measure_avoided.heating_total', async (value) => {
+      this.log(`Avoided heating total set to ${value} kWh`);
+    });
+
+    this.registerCapabilityListener('measure_avoided.cooling_total', async (value) => {
+      this.log(`Avoided cooling total set to ${value} kWh`);
+    });
+
+    this.registerCapabilityListener('measure_rmot', async (value) => {
+      this.log(`Current RMOT set to ${value}`);
+    });
+
     this.homey.flow.getConditionCard('supply_temperature_is_higher_than').registerRunListener(async (args, state) => {
       return this.getCapabilityValue('measure_temperature.supply') > args.degrees;
     });
@@ -178,6 +207,10 @@ class ComfoConnectLanC extends Device {
 
     this.homey.flow.getConditionCard('days_to_replace_filter_is_higher_than').registerRunListener(async (args, state) => {
       return this.getCapabilityValue('days_to_replace_filter') > args.days;
+    });
+
+    this.homey.flow.getConditionCard('current_rmot_is_higher_than').registerRunListener(async (args, state) => {
+      return this.getCapabilityValue('measure_rmot') > args.degrees;
     });
 
     this.homey.flow.getConditionCard('temperature_profile_is').registerRunListener(async (args, state) => {
@@ -284,6 +317,12 @@ class ComfoConnectLanC extends Device {
       this.setCapabilityValueLog('measure_airflow.supply', r.SENSOR_FAN_SUPPLY_FLOW);
       this.setCapabilityValueLog('measure_airflow.exhaust', r.SENSOR_FAN_EXHAUST_FLOW);
 
+      this.setCapabilityValueLog('measure_avoided.heating', r.SENSOR_AVOIDED_HEATING_CURRENT);
+      this.setCapabilityValueLog('measure_avoided.cooling', r.SENSOR_AVOIDED_COOLING_CURRENT);
+      this.setCapabilityValueLog('measure_avoided.heating_total', r.SENSOR_AVOIDED_HEATING_TOTAL * 1000);
+      this.setCapabilityValueLog('measure_avoided.cooling_total', r.SENSOR_AVOIDED_COOLING_TOTAL * 1000);
+      this.setCapabilityValueLog('measure_rmot', r.SENSOR_CURRENT_RMOT);
+
       let temperatureProfile = 0; // Normal
       if (r.SENSOR_TEMPERATURE_PROFILE === 1) {
         temperatureProfile = 1; // Warm
@@ -311,6 +350,7 @@ class ComfoConnectLanC extends Device {
     this.log(`setCapability ${capability}: ${JSON.stringify(value)}`);
     try {
       await this.setCapabilityValue(capability, value);
+      await this.setStoreValue(capability, value); // Zapisz wartość w pamięci trwałej
     } catch (err) {
       this.log(`setCapabilityValueLog error ${capability} ${err.message}`);
     }

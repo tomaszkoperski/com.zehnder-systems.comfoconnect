@@ -28,14 +28,12 @@ class ComfoConnectApp extends Homey.App {
     this.bridgeStatus = {};
 
     this.homey.settings.on('set', async (key) => {
-      if (this.connected) {
-        await this.disconnect();
-      }
       this.log('App settings updated...');
       this.bridgeSettings.pin = this.homey.settings.get('pin');
       this.bridgeSettings.comfoair = this.homey.settings.get('ip');
       this.log(`New IP: ${this.bridgeSettings.comfoair}`);
       this.log(`New PIN: ${this.bridgeSettings.pin}`);
+      await this.disconnect();
       if (this.bridgeSettings.comfoair && this.bridgeSettings.pin) {
         this.log('Connecting using new config...');
         await this.connect();
@@ -56,6 +54,13 @@ class ComfoConnectApp extends Homey.App {
     const initialTimeout = 10000; // Początkowe opóźnienie 1 sekunda
     let attempts = 0;
 
+    try {
+      this.bridge = new ComfoAirQ(this.bridgeSettings);
+    } catch (err) {
+      this.log(`Error creating bridge: ${err.message}`);
+      throw err;
+    }
+
     while (true) {
       try {
         this.log('Connecting...');
@@ -64,14 +69,6 @@ class ComfoConnectApp extends Homey.App {
         }
 
         this.log(`Bridge settings: ${JSON.stringify(this.bridgeSettings)}`);
-
-        // create bridge
-        try {
-          this.bridge = new ComfoAirQ(this.bridgeSettings);
-        } catch (err) {
-          this.log(`Error creating bridge: ${err.message}`);
-          throw err;
-        }
 
         // discover - this opens up a UDP socket which waits indefinitely for connection. If the IP was bad, this will permanently block the port.
         // to fix that we're doing a Promise race here to abort and potentially destroy the bridge if this hangs
@@ -142,7 +139,9 @@ class ComfoConnectApp extends Homey.App {
           }
           this.connected = false;
         });
-        this.homey.setTimeout(this.keepAlive, 8000);
+        // sometimes, immediately after reconnecting, the device can push 0s for all values.
+        // a not-to-elegant way to solve is just wait for it to settle down
+        this.homey.setTimeout(this.keepAlive, 30000);
         return true;
       } catch (err) {
         this.log(`Error when connecting: ${err.message}`);
@@ -184,6 +183,11 @@ class ComfoConnectApp extends Homey.App {
       await this.bridge.RegisterSensor(70); // SENSOR_FAN_MODE_SUPPLY
       await this.bridge.RegisterSensor(71); // SENSOR_FAN_MODE_EXHAUST
       await this.bridge.RegisterSensor(49); // OPERATING_MODE
+      await this.bridge.RegisterSensor(213); // SENSOR_AVOIDED_HEATING_CURRENT
+      await this.bridge.RegisterSensor(216); // SENSOR_AVOIDED_COOLING_CURRENT
+      await this.bridge.RegisterSensor(209); // SENSOR_CURRENT_RMOT
+      await this.bridge.RegisterSensor(215); // SENSOR_AVOIDED_HEATING_TOTAL
+      await this.bridge.RegisterSensor(218); // SENSOR_AVOIDED_COOLING_TOTAL
     } catch (err) {
       this.log(`Error when enabling sensors: ${err.message}`);
     }
@@ -244,7 +248,7 @@ class ComfoConnectApp extends Homey.App {
   }
 
   async pushReadings() {
-    this.log('!!! Pushing readings...');
+    this.log('!!! Pushing readings to devices...');
     const promises = [];
 
     try {
@@ -259,7 +263,6 @@ class ComfoConnectApp extends Homey.App {
         }
       }
       await Promise.all(promises);
-      this.log('!!! Push ended.');
     } catch (err) {
       this.log(`Push error: ${err.message}`);
     }
@@ -272,7 +275,7 @@ class ComfoConnectApp extends Homey.App {
       this.enableSensors();
       // sometimes, immediately after reconnecting, the device can push 0s for all values.
       // a not-to-elegant way to solve is just wait for it to settle down
-      this.homey.setTimeout(this.keepAlive, 20000);
+      this.homey.setTimeout(this.keepAlive, 30000);
     } catch (err) {
       this.connected = false;
       this.reconnect = true;
@@ -339,9 +342,6 @@ class ComfoConnectApp extends Homey.App {
         break;
       case '5':
         this.sendCommand('FAN_BOOST_90M');
-        break;
-      case '6':
-        this.sendCommand('FAN_BOOST');
         break;
       case '0':
         this.sendCommand('FAN_BOOST_END');

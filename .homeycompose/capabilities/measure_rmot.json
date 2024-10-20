@@ -1,0 +1,16 @@
+{
+    "type": "number",
+    "title": {
+        "en": "Current RMOT"
+    },
+    "units": {
+        "en": "°C"
+    },
+    "decimals": 1,
+    "step": 0.1,
+    "getable": true,
+    "setable": false,
+    "uiComponent": "sensor",
+    "uiQuickAction": false,
+    "insights": true
+}

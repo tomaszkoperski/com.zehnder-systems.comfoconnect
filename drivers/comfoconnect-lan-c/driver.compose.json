@@ -25,7 +25,12 @@
     "measure_airflow.supply",
     "measure_airflow.exhaust",
     "days_to_replace_filter",
-    "temperature_profile"
+    "temperature_profile",
+    "measure_rmot",
+    "measure_avoided.heating",
+    "measure_avoided.cooling",
+    "measure_avoided.heating_total",
+    "measure_avoided.cooling_total"
   ],
   "capabilitiesOptions": {
     "measure_power": {
@@ -139,6 +144,31 @@
     "operating_mode": {
       "title": {
         "en": "Operating mode"
+      }
+    },
+    "measure_rmot": {
+      "title": {
+        "en": "Current RMOT"
+      }
+    },
+    "measure_avoided.heating": {
+      "title": {
+        "en": "Avoided heating energy"
+      }
+    },
+    "measure_avoided.cooling": {
+      "title": {
+        "en": "Avoided cooling energy"
+      }
+    },
+    "measure_avoided.heating_total": {
+      "title": {
+        "en": "Total avoided heating energy"
+      }
+    },
+    "measure_avoided.cooling_total": {
+      "title": {
+        "en": "Total avoided cooling energy"
       }
     }
   },

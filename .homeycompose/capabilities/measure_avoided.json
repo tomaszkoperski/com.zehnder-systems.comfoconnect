@@ -1,0 +1,14 @@
+{
+    "type": "number",
+    "title": {
+        "en": "Avoided energy"
+    },
+    "units": {
+        "en": "W"
+    },
+    "getable": true,
+    "setable": false,
+    "uiComponent": "sensor",
+    "uiQuickAction": false,
+    "insights": true
+}

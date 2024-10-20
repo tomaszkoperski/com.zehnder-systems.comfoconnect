@@ -128,6 +128,25 @@
       ]
     },
     {
+      "id": "measure_rmot_changed",
+      "title": {
+        "en": "Current RMOT changed"
+      },
+      "hint": {
+        "en": "The current RMOT has changed"
+      },
+      "tokens": [{
+        "type": "number",
+        "name": "measure_rmot",
+        "title": {
+          "en": "Current RMOT"
+        },
+        "example": {
+          "en": "10"
+        }
+      }]
+    },
+    {
       "id": "bypass_changed",
       "title": {
         "en": "Bypass state changed"
@@ -412,6 +431,22 @@
             "en": "1"
           },
           "step": 1
+        }
+      ]
+    },
+    {
+      "id": "current_rmot_is_higher_than",
+      "title": {
+        "en": "Current RMOT is !{{higher|lower}} than ..."
+      },
+      "titleFormatted": {
+        "en": "Current RMOT is !{{higher|lower}} than [[degrees]] degrees"
+      },
+      "args": [
+        {
+          "type": "number",
+          "name": "degrees",
+          "placeholder": { "en": "10" }
         }
       ]
     },
