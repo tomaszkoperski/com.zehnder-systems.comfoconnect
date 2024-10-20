@@ -1,0 +1,22 @@
+{
+    "title": {
+      "en": "Set temperature profile"
+    },
+    "titleFormatted": {
+      "en": "Set temperature profile to [[temp_profile]]"
+    },
+    "hint": {
+      "en": "Sets the temperature profile to specified mode."
+    },
+    "args": [
+      {
+        "name": "temp_profile",
+        "type": "dropdown",
+        "values": [
+          { "id": "2", "label": { "en": "Warm" } },
+          { "id": "0", "label": { "en": "Normal" } },
+          { "id": "1", "label": { "en": "Cool" } }
+        ]
+      }
+    ]
+}

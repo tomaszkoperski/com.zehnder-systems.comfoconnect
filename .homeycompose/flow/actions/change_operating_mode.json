@@ -1,12 +1,12 @@
 {
     "title": {
-      "en": "Set operation mode"
+      "en": "Set operating mode"
     },
     "titleFormatted": {
-      "en": "Set operation mode to [[mode]]"
+      "en": "Set operating mode to [[mode]]"
     },
     "hint": {
-      "en": "Sets the operation mode of the ventilation unit"
+      "en": "Sets the operating mode of the ventilation unit"
     },
     "args": [
       {

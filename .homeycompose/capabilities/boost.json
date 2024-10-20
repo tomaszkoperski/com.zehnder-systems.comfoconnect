@@ -24,6 +24,21 @@
             "title": {
                 "en": "30 minutes"
             }
+        }, {
+            "id": "4",
+            "title": {
+                "en": "60 minutes"
+            }
+        }, {
+            "id": "5",
+            "title": {
+                "en": "90 minutes"
+            }
+        }, {
+            "id": "6",
+            "title": {
+                "en": "Continuous"
+            }
         }
     ],
     "getable": false,

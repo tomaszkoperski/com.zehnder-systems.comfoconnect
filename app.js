@@ -183,6 +183,7 @@ class ComfoConnectApp extends Homey.App {
       await this.bridge.RegisterSensor(56); // SENSOR_CURRENT_RMOT
       await this.bridge.RegisterSensor(70); // SENSOR_FAN_MODE_SUPPLY
       await this.bridge.RegisterSensor(71); // SENSOR_FAN_MODE_EXHAUST
+      await this.bridge.RegisterSensor(49); // OPERATING_MODE
     } catch (err) {
       this.log(`Error when enabling sensors: ${err.message}`);
     }
@@ -236,7 +237,7 @@ class ComfoConnectApp extends Homey.App {
       }
       this.bridge.KeepAlive();
       this.pushReadings();
-      this.homey.setTimeout(this.keepAlive, 8000);
+      this.homey.setTimeout(this.keepAlive, 15000);
     } catch (err) {
       this.log(`Error in keepAlive: ${err.message}`);
     }
@@ -333,6 +334,15 @@ class ComfoConnectApp extends Homey.App {
       case '3':
         this.sendCommand('FAN_BOOST_30M');
         break;
+      case '4':
+        this.sendCommand('FAN_BOOST_60M');
+        break;
+      case '5':
+        this.sendCommand('FAN_BOOST_90M');
+        break;
+      case '6':
+        this.sendCommand('FAN_BOOST');
+        break;
       case '0':
         this.sendCommand('FAN_BOOST_END');
         break;
@@ -359,7 +369,7 @@ class ComfoConnectApp extends Homey.App {
     }
   }
 
-  setBypass(value) {
+  setBypassMode(value) {
     this.log(`Setting bypass mode to ${value}`);
     switch (value) {
       case '0':
@@ -370,6 +380,22 @@ class ComfoConnectApp extends Homey.App {
         break;
       case '2':
         this.sendCommand('BYPASS_OFF');
+        break;
+      default:
+    }
+  }
+
+  setTempProfile(value) {
+    this.log(`Setting temperature profile to ${value}`);
+    switch (value) {
+      case '0':
+        this.sendCommand('TEMPPROF_NORMAL');
+        break;
+      case '1':
+        this.sendCommand('TEMPPROF_COOL');
+        break;
+      case '2':
+        this.sendCommand('TEMPPROF_WARM');
         break;
       default:
     }

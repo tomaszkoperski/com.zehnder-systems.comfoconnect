@@ -26,6 +26,9 @@ See [Issue Tracker](https://github.com/tomaszkoperski/com.zehnder-systems.comfoc
 
 ## Change Log
 
+### v1.5.2 (2024-10-20)
+Added more controls around Boost, Ventilation Mode, Fan Speed Mode, Bypass Controll Mode and Temperature Profile (including relevant flow cards). Unified handling of different settings in the UI. Added more Boost options, including continuous boost. Overal cleanup of the app.
+
 ### v1.5.1 (2024-10-20)
 Better connection handling, cleanup, added days to replace filter handling (Tomasz Koperski)
 

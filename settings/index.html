@@ -17,7 +17,7 @@
     </p>
 
     <fieldset>
-      <legend>Gateway network</legend>
+      <legend>ComfoConnect Gateway network settings</legend>
 
       <div class="field row">
         <label for="ip">IP address</label>
@@ -35,6 +35,8 @@
 
     <button id="save" class="right">Save changes</button>
 
+    <p id="saveMessage" style="display: none; color: green;">Changes saved successfully!</p>
+
     <script type="text/javascript">
       // a method named 'onHomeyReady' must be present in your code
       function onHomeyReady(Homey) {
@@ -44,6 +46,7 @@
         var ipElement = document.getElementById("ip");
         var pinElement = document.getElementById("pin");
         var saveElement = document.getElementById("save");
+        var saveMessageElement = document.getElementById("saveMessage");
 
         Homey.get("ip", function (err, ip) {
           if (err) return Homey.alert(err);
@@ -62,6 +65,12 @@
           Homey.set("pin", pinElement.value, function (err) {
             if (err) return Homey.alert(err);
           });
+
+          // Show success message
+          saveMessageElement.style.display = "block";
+          setTimeout(function() {
+            saveMessageElement.style.display = "none";
+          }, 3000); // Hide message after 3 seconds
         });
       }
     </script>

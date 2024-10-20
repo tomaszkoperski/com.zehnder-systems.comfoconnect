@@ -12,10 +12,10 @@ class ComfoConnectLanCDriver extends Driver {
   async onInit() {
     this.log('ComfoConnect LAN C driver has been initialized');
 
-    const cardChangeSpeed = this.homey.flow.getActionCard('change_speed');
+    const cardChangeSpeed = this.homey.flow.getActionCard('change_fan_speed');
     cardChangeSpeed.registerRunListener(async (args, state) => {
       this.log(`Change speed: ${JSON.stringify(args)}, ${JSON.stringify(state)}`);
-      this.homey.app.setSpeed(args['speed']);
+      this.homey.app.setSpeed(args['fan_speed']);
     });
 
     const cardBoost = this.homey.flow.getActionCard('boost');
@@ -24,10 +24,10 @@ class ComfoConnectLanCDriver extends Driver {
       this.homey.app.setBoost(args['period']);
     });
 
-    const cardMode = this.homey.flow.getActionCard('change_mode');
+    const cardMode = this.homey.flow.getActionCard('change_operating_mode');
     cardMode.registerRunListener(async (args, state) => {
       this.log(`Mode: ${JSON.stringify(args)}, ${JSON.stringify(state)}`);
-      this.homey.app.setOperatingMode(args['mode']);
+      this.homey.app.setOperatingMode(args['operating_mode']);
     });
 
     const cardChangeVentMode = this.homey.flow.getActionCard('change_ventilation_mode');
@@ -39,7 +39,13 @@ class ComfoConnectLanCDriver extends Driver {
     const cardChangeBypassMode = this.homey.flow.getActionCard('change_bypass_mode');
     cardChangeBypassMode.registerRunListener(async (args, state) => {
       this.log(`Bypass mode: ${JSON.stringify(args)}, ${JSON.stringify(state)}`);
-      this.homey.app.setBypass(args['bypass_mode']);
+      this.homey.app.setBypassMode(args['bypass_mode']);
+    });
+
+    const cardChangeTempProfile = this.homey.flow.getActionCard('change_temp_profile');
+    cardChangeTempProfile.registerRunListener(async (args, state) => {
+      this.log(`Temperature profile: ${JSON.stringify(args)}, ${JSON.stringify(state)}`);
+      this.homey.app.setTempProfile(args['temp_profile']);
     });
   }
 

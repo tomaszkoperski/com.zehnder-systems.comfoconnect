@@ -24,7 +24,8 @@
     "measure_humidity.exhaust",
     "measure_airflow.supply",
     "measure_airflow.exhaust",
-    "days_to_replace_filter"
+    "days_to_replace_filter",
+    "temperature_profile"
   ],
   "capabilitiesOptions": {
     "measure_power": {
@@ -119,6 +120,26 @@
       "title": {
         "en": "Days to replace filter"
       }
+    },
+    "temperature_profile": {
+      "title": {
+        "en": "Temperature profile"
+      }
+    },
+    "ventilation_mode": {
+      "title": {
+        "en": "Ventilation mode"
+      }
+    },
+    "boost": {
+      "title": {
+        "en": "Boost"
+      }
+    },
+    "operating_mode": {
+      "title": {
+        "en": "Operating mode"
+      }
     }
   },
   "platforms": [
@@ -133,78 +154,6 @@
   ],
   "energy": {
   },
-  "settings": [
-    {
-      "type": "group",
-      "label": {
-        "en": "General settings"
-      },
-      "children": [
-        {
-          "id": "temp_profile",
-          "type": "dropdown",
-          "value": "normal",
-          "label": {
-            "en": "Temperature profile"
-          },
-          "values": [
-            {
-              "id": "warm",
-              "label": {
-                "en": "Warm"
-              }
-            },
-            {
-              "id": "normal",
-              "label": {
-                "en": "Normal"
-              }
-            },
-            {
-              "id": "cool",
-              "label": {
-                "en": "Cool"
-              }
-            }
-          ],
-          "hint": {
-            "en": "Select the best temperature profile for your liking."
-          }
-        },
-        {
-          "id": "bypass_mode",
-          "type": "dropdown",
-          "value": "auto",
-          "label": {
-            "en": "Bypass"
-          },
-          "values": [
-            {
-              "id": "auto",
-              "label": {
-                "en": "Auto"
-              }
-            },
-            {
-              "id": "on",
-              "label": {
-                "en": "Activated"
-              }
-            },
-            {
-              "id": "off",
-              "label": {
-                "en": "Deactivated"
-              }
-            }
-          ],
-          "hint": {
-            "en": "Set the heat recovery control of the bypass functionality.\nAuto: the unit will control the heat recovery control automatically; (default setting)\nActivated: the unit will decrease the heat recovery control to a minimum (if possible outdoor air is supplied directly into the dwelling);\nDeactivated: the unit will increase the heat recovery control to a maximum."
-          }
-        }
-      ]
-    }
-  ],
   "images": {
     "small": "{{driverAssetsPath}}/images/small.png",
     "large": "{{driverAssetsPath}}/images/large.png",

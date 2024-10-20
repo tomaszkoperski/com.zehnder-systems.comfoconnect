@@ -1,23 +1,24 @@
 {
     "type": "enum",
     "title": {
-        "en": "Bypass mode"
+        "en": "Temperature profile"
     },
     "values": [
         {
+            "id": "2",
+            "title": {
+                "en": "Warm"
+            }
+        },
+        {
             "id": "0",
             "title": {
-                "en": "Auto"
+                "en": "Normal"
             }
         }, {
             "id": "1",
             "title": {
-                "en": "Activated"
-            }
-        }, {
-            "id": "2",
-            "title": {
-                "en": "Deactivated"
+                "en": "Cool"
             }
         }
     ],
@@ -25,5 +26,5 @@
     "setable": true,
     "uiComponent": "picker",
     "uiQuickAction": false,
-    "insights": false
+    "insights": true
 }

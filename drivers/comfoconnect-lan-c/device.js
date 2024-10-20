@@ -13,16 +13,11 @@ class ComfoConnectLanC extends Device {
     this.log('ComfoConnect LAN C has been initialized');
     this.homey.app.activate();
 
-    // Check capabilities, add missing ones
-    // for (const capability of this.getCapabilities()) {
-    //   this.log(`Found capability: ${capability}`);
-    // }
-
     const capabilitiesToAdd = [
       'measure_airflow.supply', 'measure_airflow.exhaust', 'ventilation_mode',
       'measure_fan_speed.supply', 'measure_fan_speed.exhaust',
       'boost', 'fan_next_change', 'measure_fan_duty.supply', 'measure_fan_duty.exhaust',
-      'bypass_state', 'bypass_mode',
+      'bypass_state', 'bypass_mode', 'temperature_profile', 'operating_mode', 'fan_speed_mode',
     ];
     for (const capability of capabilitiesToAdd) {
       if (!this.hasCapability(capability)) {
@@ -47,17 +42,21 @@ class ComfoConnectLanC extends Device {
 
     this.registerCapabilityListener('bypass_state', async (value) => {
       this.log(`Setting bypass state to ${value}`);
-      this.homey.app.setBypass(value);
     });
 
     this.registerCapabilityListener('bypass_mode', async (value) => {
       this.log(`Setting bypass mode to ${value}`);
-      await this.setSettings({ bypass_mode: value });
+      await this.setBypassMode(value);
     });
 
     this.registerCapabilityListener('boost', async (value) => {
       this.log(`Setting boost to ${value}`);
       this.homey.app.setBoost(value);
+    });
+
+    this.registerCapabilityListener('temperature_profile', async (value) => {
+      this.log(`Setting temperature profile to ${value}`);
+      this.homey.app.setTempProfile(value);
     });
 
     this.registerCapabilityListener('ventilation_mode', async (value) => {
@@ -181,6 +180,26 @@ class ComfoConnectLanC extends Device {
       return this.getCapabilityValue('days_to_replace_filter') > args.days;
     });
 
+    this.homey.flow.getConditionCard('temperature_profile_is').registerRunListener(async (args, state) => {
+      return this.getCapabilityValue('temperature_profile') === args.profile;
+    });
+
+    this.homey.flow.getConditionCard('ventilation_mode_is').registerRunListener(async (args, state) => {
+      return this.getCapabilityValue('ventilation_mode') === args.mode;
+    });
+
+    this.homey.flow.getConditionCard('bypass_mode_is').registerRunListener(async (args, state) => {
+      return this.getCapabilityValue('bypass_mode') === args.mode;
+    });
+
+    this.homey.flow.getConditionCard('fan_speed_mode_is').registerRunListener(async (args, state) => {
+      return this.getCapabilityValue('fan_speed_mode') === args.mode;
+    });
+
+    this.homey.flow.getConditionCard('operating_mode_is').registerRunListener(async (args, state) => {
+      return this.getCapabilityValue('operating_mode') === args.mode;
+    });
+
     // await this.__updateDevice();
   }
 
@@ -211,42 +230,8 @@ class ComfoConnectLanC extends Device {
       this.log(`ChangedKeys: ${JSON.stringify(changedKeys)}`);
 
       for (const key of changedKeys) {
-        if (key === 'bypass_mode') {
-          this.log(`Changing vent mode to ${newSettings.bypass_mode}`);
-          switch (newSettings.bypass_mode) {
-            case 'auto':
-              this.homey.app.sendCommand('BYPASS_AUTO');
-              this.setCapabilityValue('bypass_mode', '0');
-              break;
-            case 'on':
-              this.homey.app.sendCommand('BYPASS_ON');
-              this.setCapabilityValue('bypass_mode', '1');
-              break;
-            case 'off':
-              this.homey.app.sendCommand('BYPASS_OFF');
-              this.setCapabilityValue('bypass_mode', '2');
-              break;
-            default:
-          }
-        }
-
-        if (key === 'temp_profile') {
-          this.log(`Changing vent mode to ${newSettings.temp_profile}`);
-          switch (newSettings.temp_profile) {
-            case 'warm':
-              this.homey.app.sendCommand('TEMPPROF_WARM');
-              break;
-            case 'normal':
-              this.homey.app.sendCommand('TEMPPROF_NORMAL');
-              break;
-            case 'cool':
-              this.homey.app.sendCommand('TEMPPROF_COOL');
-              break;
-            default:
-          }
-        }
-
-        this.__updateDevice();
+        this.log(`Changing ${key} to ${newSettings[key]}`);
+        await this.__updateDevice();
       }
     } catch (err) {
       this.log(`Error when updating settings: ${err.message}`);
@@ -298,6 +283,14 @@ class ComfoConnectLanC extends Device {
 
       this.setCapabilityValueLog('measure_airflow.supply', r.SENSOR_FAN_SUPPLY_FLOW);
       this.setCapabilityValueLog('measure_airflow.exhaust', r.SENSOR_FAN_EXHAUST_FLOW);
+
+      let temperatureProfile = 0; // Normal
+      if (r.SENSOR_TEMPERATURE_PROFILE === 1) {
+        temperatureProfile = 1; // Warm
+      } else if (r.SENSOR_TEMPERATURE_PROFILE === 2) {
+        temperatureProfile = 2; // Cool
+      }
+      this.setCapabilityValueLog('temperature_profile', temperatureProfile.toString());
 
       let ventMode = 1; // Balance
       if (r.SENSOR_FAN_MODE_SUPPLY === 1) {

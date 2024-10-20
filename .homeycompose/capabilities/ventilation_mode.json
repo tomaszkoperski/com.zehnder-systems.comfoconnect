@@ -25,5 +25,5 @@
     "setable": true,
     "uiComponent": "picker",
     "uiQuickAction": false,
-    "insights": false
+    "insights": true
 }

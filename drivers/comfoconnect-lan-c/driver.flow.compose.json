@@ -414,6 +414,106 @@
           "step": 1
         }
       ]
+    },
+    {
+      "id": "temperature_profile_is",
+      "title": {
+        "en": "Temperature profile is ..."
+      },
+      "titleFormatted": {
+        "en": "Temperature profile is [[profile]]"
+      },
+      "args": [
+        {
+          "type": "dropdown",
+          "name": "profile",
+          "values": [
+            { "id": "2", "label": { "en": "Warm" } },
+            { "id": "0", "label": { "en": "Normal" } },
+            { "id": "1", "label": { "en": "Cool" } }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ventilation_mode_is",
+      "title": {
+        "en": "Ventilation mode is ..."
+      },
+      "titleFormatted": {
+        "en": "Ventilation mode is [[mode]]"
+      },
+      "args": [
+        {
+          "type": "dropdown",
+          "name": "mode",
+          "values": [
+            { "id": "1", "label": { "en": "Balance" } },
+            { "id": "2", "label": { "en": "Supply only" } },
+            { "id": "3", "label": { "en": "Extract only" } }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bypass_mode_is",
+      "title": {
+        "en": "Bypass mode is ..."
+      },
+      "titleFormatted": {
+        "en": "Bypass mode is [[mode]]"
+      },
+      "args": [
+        {
+          "type": "dropdown",
+          "name": "mode",
+          "values": [
+            { "id": "0", "label": { "en": "Auto" } },
+            { "id": "1", "label": { "en": "Activated" } },
+            { "id": "2", "label": { "en": "Deactivated" } }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "operating_mode_is",
+      "title": {
+        "en": "Operating mode is ..."
+      },
+      "titleFormatted": {
+        "en": "Operating mode is [[mode]]"
+      },
+      "args": [
+        {
+          "type": "dropdown",
+          "name": "mode",
+          "values": [
+            { "id": "1", "label": { "en": "Manual" } },
+            { "id": "-1", "label": { "en": "Auto" } }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fan_speed_mode_is",
+      "title": {
+        "en": "Ventilation fan speed is ..."
+      },
+      "titleFormatted": {
+        "en": "Ventilation fan speed is [[mode]]"
+      },
+      "args": [
+        {
+          "type": "dropdown",
+          "name": "mode",
+          "values": [
+            { "id": "1", "label": { "en": "Low" } },
+            { "id": "2", "label": { "en": "Medium" } },
+            { "id": "3", "label": { "en": "High" } },
+            { "id": "0", "label": { "en": "Away (idle)" } }
+          ]
+        }
+      ]
     }
   ]
 }
