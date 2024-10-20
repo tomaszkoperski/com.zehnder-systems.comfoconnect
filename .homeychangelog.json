@@ -52,5 +52,8 @@
   },
   "1.5.2": {
     "en": "Added more controls around Boost, Ventilation Mode, Fan Speed Mode, Bypass Controll Mode and Temperature Profile (including relevant flow cards). Unified handling of different settings in the UI. Added more Boost options, including continuous boost. Overal cleanup of the app."
+  },
+  "1.5.3": {
+    "en": "Added more controls around Boost, Ventilation Mode, Fan Speed Mode, Bypass Controll Mode and Temperature Profile (including relevant flow cards). Unified handling of different settings in the UI. Added more Boost timing options. Added RMOT and Avoided heating/cooling energy capabilities. Overal cleanup of the app."
   }
 }
