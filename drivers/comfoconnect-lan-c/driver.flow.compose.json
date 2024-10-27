@@ -383,12 +383,12 @@
         "en": "Exhaust fan speed is !{{higher|lower}} than ..."
       },
       "titleFormatted": {
-        "en": "Exhaust fan speed is !{{higher|lower}} than [[speed]] rpm"
+        "en": "Exhaust fan speed is !{{higher|lower}} than [[fan_speed]] rpm"
       },
       "args": [
         {
           "type": "number",
-          "name": "speed",
+          "name": "fan_speed",
           "placeholder": {
             "en": "1337"
           },
@@ -402,12 +402,12 @@
         "en": "Supply fan speed is !{{higher|lower}} than ..."
       },
       "titleFormatted": {
-        "en": "Supply fan speed is !{{higher|lower}} than [[speed]] rpm"
+        "en": "Supply fan speed is !{{higher|lower}} than [[fan_speed]] rpm"
       },
       "args": [
         {
           "type": "number",
-          "name": "speed",
+          "name": "fan_speed",
           "placeholder": {
             "en": "1337"
           },
@@ -476,12 +476,12 @@
         "en": "Ventilation mode is ..."
       },
       "titleFormatted": {
-        "en": "Ventilation mode is [[mode]]"
+        "en": "Ventilation mode is [[ventilation_mode]]"
       },
       "args": [
         {
           "type": "dropdown",
-          "name": "mode",
+          "name": "ventilation_mode",
           "values": [
             { "id": "1", "label": { "en": "Balance" } },
             { "id": "2", "label": { "en": "Supply only" } },
@@ -496,12 +496,12 @@
         "en": "Bypass mode is ..."
       },
       "titleFormatted": {
-        "en": "Bypass mode is [[mode]]"
+        "en": "Bypass mode is [[bypass_mode]]"
       },
       "args": [
         {
           "type": "dropdown",
-          "name": "mode",
+          "name": "bypass_mode",
           "values": [
             { "id": "0", "label": { "en": "Auto" } },
             { "id": "1", "label": { "en": "Activated" } },
@@ -516,12 +516,12 @@
         "en": "Operating mode is ..."
       },
       "titleFormatted": {
-        "en": "Operating mode is [[mode]]"
+        "en": "Operating mode is [[operating_mode]]"
       },
       "args": [
         {
           "type": "dropdown",
-          "name": "mode",
+          "name": "operating_mode",
           "values": [
             { "id": "1", "label": { "en": "Manual" } },
             { "id": "-1", "label": { "en": "Auto" } }
@@ -535,12 +535,12 @@
         "en": "Ventilation fan speed is ..."
       },
       "titleFormatted": {
-        "en": "Ventilation fan speed is [[mode]]"
+        "en": "Ventilation fan speed is [[fan_speed]]"
       },
       "args": [
         {
           "type": "dropdown",
-          "name": "mode",
+          "name": "fan_speed",
           "values": [
             { "id": "1", "label": { "en": "Low" } },
             { "id": "2", "label": { "en": "Medium" } },

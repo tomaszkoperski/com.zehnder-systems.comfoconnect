@@ -3,14 +3,14 @@
       "en": "Set operating mode"
     },
     "titleFormatted": {
-      "en": "Set operating mode to [[mode]]"
+      "en": "Set operating mode to [[operating_mode]]"
     },
     "hint": {
       "en": "Sets the operating mode of the ventilation unit"
     },
     "args": [
       {
-        "name": "mode",
+        "name": "operating_mode",
         "type": "dropdown",
         "values": [
           { "id": "1", "label": { "en": "Manual" } },

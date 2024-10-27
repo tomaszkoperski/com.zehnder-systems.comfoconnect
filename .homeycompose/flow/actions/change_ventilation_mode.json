@@ -3,14 +3,14 @@
       "en": "Set ventilation mode"
     },
     "titleFormatted": {
-      "en": "Set ventilation mode to [[vent_mode]]"
+      "en": "Set ventilation mode to [[ventilation_mode]]"
     },
     "hint": {
       "en": "Sets the ventilation to specified mode."
     },
     "args": [
       {
-        "name": "vent_mode",
+        "name": "ventilation_mode",
         "type": "dropdown",
         "values": [
           { "id": "1", "label": { "en": "Balance" } },

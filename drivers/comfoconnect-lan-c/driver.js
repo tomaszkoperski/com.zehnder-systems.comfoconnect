@@ -33,7 +33,7 @@ class ComfoConnectLanCDriver extends Driver {
     const cardChangeVentMode = this.homey.flow.getActionCard('change_ventilation_mode');
     cardChangeVentMode.registerRunListener(async (args, state) => {
       this.log(`Ventilation mode: ${JSON.stringify(args)}, ${JSON.stringify(state)}`);
-      this.homey.app.setVentilationMode(args['vent_mode']);
+      this.homey.app.setVentilationMode(args['ventilation_mode']);
     });
 
     const cardChangeBypassMode = this.homey.flow.getActionCard('change_bypass_mode');

@@ -154,14 +154,14 @@
           "en": "Set ventilation fan speed"
         },
         "titleFormatted": {
-          "en": "Set ventilation fan speed to [[speed]]"
+          "en": "Set ventilation fan speed to [[fan_speed]]"
         },
         "hint": {
           "en": "Sets the speed of the ventilation fan to specified mode."
         },
         "args": [
           {
-            "name": "speed",
+            "name": "fan_speed",
             "type": "dropdown",
             "values": [
               {
@@ -198,14 +198,14 @@
           "en": "Set operating mode"
         },
         "titleFormatted": {
-          "en": "Set operating mode to [[mode]]"
+          "en": "Set operating mode to [[operating_mode]]"
         },
         "hint": {
           "en": "Sets the operating mode of the ventilation unit"
         },
         "args": [
           {
-            "name": "mode",
+            "name": "operating_mode",
             "type": "dropdown",
             "values": [
               {
@@ -268,14 +268,14 @@
           "en": "Set ventilation mode"
         },
         "titleFormatted": {
-          "en": "Set ventilation mode to [[vent_mode]]"
+          "en": "Set ventilation mode to [[ventilation_mode]]"
         },
         "hint": {
           "en": "Sets the ventilation to specified mode."
         },
         "args": [
           {
-            "name": "vent_mode",
+            "name": "ventilation_mode",
             "type": "dropdown",
             "values": [
               {
@@ -785,7 +785,7 @@
           "en": "Exhaust fan speed is !{{higher|lower}} than ..."
         },
         "titleFormatted": {
-          "en": "Exhaust fan speed is !{{higher|lower}} than [[speed]] rpm"
+          "en": "Exhaust fan speed is !{{higher|lower}} than [[fan_speed]] rpm"
         },
         "args": [
           {
@@ -795,7 +795,7 @@
           },
           {
             "type": "number",
-            "name": "speed",
+            "name": "fan_speed",
             "placeholder": {
               "en": "1337"
             },
@@ -809,7 +809,7 @@
           "en": "Supply fan speed is !{{higher|lower}} than ..."
         },
         "titleFormatted": {
-          "en": "Supply fan speed is !{{higher|lower}} than [[speed]] rpm"
+          "en": "Supply fan speed is !{{higher|lower}} than [[fan_speed]] rpm"
         },
         "args": [
           {
@@ -819,7 +819,7 @@
           },
           {
             "type": "number",
-            "name": "speed",
+            "name": "fan_speed",
             "placeholder": {
               "en": "1337"
             },
@@ -920,7 +920,7 @@
           "en": "Ventilation mode is ..."
         },
         "titleFormatted": {
-          "en": "Ventilation mode is [[mode]]"
+          "en": "Ventilation mode is [[ventilation_mode]]"
         },
         "args": [
           {
@@ -930,7 +930,7 @@
           },
           {
             "type": "dropdown",
-            "name": "mode",
+            "name": "ventilation_mode",
             "values": [
               {
                 "id": "1",
@@ -960,7 +960,7 @@
           "en": "Bypass mode is ..."
         },
         "titleFormatted": {
-          "en": "Bypass mode is [[mode]]"
+          "en": "Bypass mode is [[bypass_mode]]"
         },
         "args": [
           {
@@ -970,7 +970,7 @@
           },
           {
             "type": "dropdown",
-            "name": "mode",
+            "name": "bypass_mode",
             "values": [
               {
                 "id": "0",
@@ -1000,7 +1000,7 @@
           "en": "Operating mode is ..."
         },
         "titleFormatted": {
-          "en": "Operating mode is [[mode]]"
+          "en": "Operating mode is [[operating_mode]]"
         },
         "args": [
           {
@@ -1010,7 +1010,7 @@
           },
           {
             "type": "dropdown",
-            "name": "mode",
+            "name": "operating_mode",
             "values": [
               {
                 "id": "1",
@@ -1034,7 +1034,7 @@
           "en": "Ventilation fan speed is ..."
         },
         "titleFormatted": {
-          "en": "Ventilation fan speed is [[mode]]"
+          "en": "Ventilation fan speed is [[fan_speed]]"
         },
         "args": [
           {
@@ -1044,7 +1044,7 @@
           },
           {
             "type": "dropdown",
-            "name": "mode",
+            "name": "fan_speed",
             "values": [
               {
                 "id": "1",
