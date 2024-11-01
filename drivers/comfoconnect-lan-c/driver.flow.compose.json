@@ -1,168 +1,181 @@
 {
-  "triggers": [{
-      "id": "measure_humidity_changed",
-      "title": {
-        "en": "Humidity changed"
-      },
-      "hint": {
-        "en": "The measured humidity has changed"
-      },
-      "tokens": [{
-          "type": "number",
-          "name": "measure_humidity.supply",
-          "title": {
-            "en": "Supply humidity"
-          },
-          "example": {
-            "en": "60"
-          }
-        },
-        {
-          "type": "number",
-          "name": "measure_humidity.extract",
-          "title": {
-            "en": "Extract humidity"
-          },
-          "example": {
-            "en": "60"
-          }
-        },
-        {
-          "type": "number",
-          "name": "measure_humidity.outdoor",
-          "title": {
-            "en": "Outdoor humidity"
-          },
-          "example": {
-            "en": "60"
-          }
-        }, {
-          "type": "number",
-          "name": "measure_humidity.exhaust",
-          "title": {
-            "en": "Exhaust humidity"
-          },
-          "example": {
-            "en": "60"
-          }
-        }
-      ]
-    },
+  "triggers": [
     {
-      "id": "measure_temperature_changed",
-      "title": {
-        "en": "Temperature changed"
-      },
-      "hint": {
-        "en": "The measured temperature has changed"
-      },
+      "id": "measure_temperature.supply_changed",
+      "title": { "en": "Supply temperature changed" },
+      "hint": { "en": "Measured supply temperature has changed" },
       "tokens": [{
           "type": "number",
           "name": "measure_temperature.supply",
-          "title": {
-            "en": "Supply temperature"
-          },
-          "example": {
-            "en": "20"
-          }
-        },
-        {
-          "type": "number",
-          "name": "measure_temperature.extract",
-          "title": {
-            "en": "Extract temperature"
-          },
-          "example": {
-            "en": "23"
-          }
-        },
-        {
-          "type": "number",
-          "name": "measure_temperature.outdoor",
-          "title": {
-            "en": "Outdoor temperature"
-          },
-          "example": {
-            "en": "-3"
-          }
-        }, {
-          "type": "number",
-          "name": "measure_temperature.exhaust",
-          "title": {
-            "en": "Exhaust temperature"
-          },
-          "example": {
-            "en": "20"
-          }
+          "title": { "en": "Supply temperature" },
+          "example": { "en": "13" }
         }
       ]
     },
     {
-      "id": "measure_airflow_changed",
-      "title": {
-        "en": "Airflow changed"
-      },
-      "hint": {
-        "en": "The measured airflow has changed"
-      },
+      "id": "measure_temperature.exhaust_changed",
+      "title": { "en": "Exhaust temperature changed" },
+      "hint": { "en": "Measured exhaust temperature has changed" },
+      "tokens": [{
+          "type": "number",
+          "name": "measure_temperature.exhaust",
+          "title": { "en": "Exhaust temperature" },
+          "example": { "en": "23" }
+        }
+      ]
+    },
+    {
+      "id": "measure_temperature.extract_changed",
+      "title": { "en": "Extract temperature changed" },
+      "hint": { "en": "Measured extract temperature has changed" },
+      "tokens": [{
+          "type": "number",
+          "name": "measure_temperature.extract",
+          "title": { "en": "Extract temperature" },
+          "example": { "en": "20" }
+        }
+      ]
+    },
+    {
+      "id": "measure_temperature.outdoor_changed",
+      "title": { "en": "Outdoor temperature changed" },
+      "hint": { "en": "Measured outdoor temperature has changed" },
+      "tokens": [{
+          "type": "number",
+          "name": "measure_temperature.outdoor",
+          "title": { "en": "Outdoor temperature" },
+          "example": { "en": "-2" }
+        }
+      ]
+    },
+    {
+      "id": "measure_humidity.supply_changed",
+      "title": { "en": "Supply humidity changed" },
+      "hint": { "en": "Measured supply humidity has changed" },
+      "tokens": [{
+          "type": "number",
+          "name": "measure_humidity.supply",
+          "title": { "en": "Supply humidity" },
+          "example": { "en": "60" }
+        }
+      ]
+    },
+    {
+      "id": "measure_humidity.exhaust_changed",
+      "title": { "en": "Exhaust humidity changed" },
+      "hint": { "en": "Measured exhaust humidity has changed" },
+      "tokens": [{
+          "type": "number",
+          "name": "measure_humidity.exhaust",
+          "title": { "en": "Exhaust humidity" },
+          "example": { "en": "44" }
+        }
+      ]
+    },
+    {
+      "id": "measure_humidity.extract_changed",
+      "title": { "en": "Extract humidity changed" },
+      "hint": { "en": "Measured extract humidity has changed" },
+      "tokens": [{
+          "type": "number",
+          "name": "measure_humidity.extract",
+          "title": { "en": "Extract humidity" },
+          "example": { "en": "55" }
+        }
+      ]
+    },
+    {
+      "id": "measure_humidity.outdoor_changed",
+      "title": { "en": "Outdoor humidity changed" },
+      "hint": { "en": "Measured outdoor humidity has changed" },
+      "tokens": [{
+          "type": "number",
+          "name": "measure_humidity.outdoor",
+          "title": { "en": "Outdoor humidity" },
+          "example": { "en": "87" }
+        }
+      ]
+    },
+    {
+      "id": "measure_airflow.supply_changed",
+      "title": { "en": "Supply airflow changed" },
+      "hint": { "en": "Measured supply airflow has changed" },
       "tokens": [{
           "type": "number",
           "name": "measure_airflow.supply",
-          "title": {
-            "en": "Supply airflow"
-          },
-          "example": {
-            "en": "270"
-          }
-        },
-        {
+          "title": { "en": "Supply airflow" },
+          "example": { "en": "270" }
+        }
+      ]
+    },
+    {
+      "id": "measure_airflow.exhaust_changed",
+      "title": { "en": "Exhaust airflow changed" },
+      "hint": { "en": "Measured exhaust airflow has changed" },
+      "tokens": [{
           "type": "number",
           "name": "measure_airflow.exhaust",
-          "title": {
-            "en": "Exhaust airflow"
-          },
-          "example": {
-            "en": "270"
-          }
+          "title": { "en": "Exhaust airflow" },
+          "example": { "en": "270" }
+        }
+      ]
+    },
+    {
+      "id": "measure_fan_speed.supply_changed",
+      "title": { "en": "Supply fan speed changed" },
+      "hint": { "en": "Measured supply fan speed has changed" },
+      "tokens": [{
+          "type": "number",
+          "name": "measure_fan_speed.supply",
+          "title": { "en": "Supply fan speed" },
+          "example": { "en": "1337" }
+        }
+      ]
+    },
+    {
+      "id": "measure_fan_speed.exhaust_changed",
+      "title": { "en": "Exhaust fan speed changed" },
+      "hint": { "en": "Measured exhaust fan speed has changed" },
+      "tokens": [{
+          "type": "number",
+          "name": "measure_fan_speed.exhaust",
+          "title": { "en": "Exhaust fan speed" },
+          "example": { "en": "1337" }
         }
       ]
     },
     {
       "id": "measure_rmot_changed",
-      "title": {
-        "en": "Current RMOT changed"
-      },
-      "hint": {
-        "en": "The current RMOT has changed"
-      },
+      "title": { "en": "Current RMOT changed" },
+      "hint": { "en": "The current RMOT has changed" },
       "tokens": [{
         "type": "number",
         "name": "measure_rmot",
-        "title": {
-          "en": "Current RMOT"
-        },
-        "example": {
-          "en": "10"
-        }
+        "title": { "en": "Current RMOT" },
+        "example": { "en": "10" }
       }]
     },
     {
       "id": "bypass_changed",
-      "title": {
-        "en": "Bypass state changed"
-      },
-      "hint": {
-        "en": "The bypass state has changed"
-      },
+      "title": { "en": "Bypass state changed" },
+      "hint": { "en": "The bypass state has changed" },
       "tokens": [{
           "type": "number",
           "name": "bypass_state",
-          "title": {
-            "en": "Bypass state"
-          },
-          "example": {
-            "en": "50"
-          }
+          "title": { "en": "Bypass state" },
+          "example": { "en": "50" }
+        }
+      ]
+    },
+    {
+      "id": "measure_power_changed",
+      "title": { "en": "Power consumption changed" },
+      "tokens": [
+        {
+          "name": "measure_power",
+          "type": "number",
+          "title": { "en": "Power" },
+          "example": 100
         }
       ]
     }
@@ -170,384 +183,170 @@
   "conditions": [
     {
       "id": "supply_temperature_is_higher_than",
-      "title": {
-        "en": "Supply temperature is !{{higher|lower}} than ..."
-      },
-      "titleFormatted": {
-        "en": "Supply temperature is !{{higher|lower}} than [[degrees]] degrees"
-      },
+      "title": { "en": "Supply temperature is !{{higher|lower}} than ..." },
+      "titleFormatted": { "en": "Supply temperature is !{{higher|lower}} than [[degrees]] degrees" },
       "args": [
-        {
-          "type": "number",
-          "name": "degrees",
-          "placeholder": {
-            "en": "20"
-          },
-          "step": 0.1
-        }
+        { "type": "number", "name": "degrees", "placeholder": { "en": "20" }, "step": 0.1 }
       ]
     },
     {
       "id": "extract_temperature_is_higher_than",
-      "title": {
-        "en": "Extract temperature is !{{higher|lower}} than ..."
-      },
-      "titleFormatted": {
-        "en": "Extract temperature is !{{higher|lower}} than [[degrees]] degrees"
-      },
+      "title": { "en": "Extract temperature is !{{higher|lower}} than ..." },
+      "titleFormatted": { "en": "Extract temperature is !{{higher|lower}} than [[degrees]] degrees" },
       "args": [
-        {
-          "type": "number",
-          "name": "degrees",
-          "placeholder": {
-            "en": "20"
-          },
-          "step": 0.1
-        }
+        { "type": "number", "name": "degrees", "placeholder": { "en": "20" }, "step": 0.1 }
       ]
     },
     {
       "id": "outdoor_temperature_is_higher_than",
-      "title": {
-        "en": "Outdoor temperature is !{{higher|lower}} than ..."
-      },
-      "titleFormatted": {
-        "en": "Outdoor temperature is !{{higher|lower}} than [[degrees]] degrees"
-      },
+      "title": { "en": "Outdoor temperature is !{{higher|lower}} than ..." },
+      "titleFormatted": { "en": "Outdoor temperature is !{{higher|lower}} than [[degrees]] degrees" },
       "args": [
-        {
-          "type": "number",
-          "name": "degrees",
-          "placeholder": {
-            "en": "20"
-          },
-          "step": 0.1
-        }
+        { "type": "number", "name": "degrees", "placeholder": { "en": "20" }, "step": 0.1 }
       ]
     },
     {
       "id": "exhaust_temperature_is_higher_than",
-      "title": {
-        "en": "Exhaust temperature is !{{higher|lower}} than ..."
-      },
-      "titleFormatted": {
-        "en": "Exhaust temperature is !{{higher|lower}} than [[degrees]] degrees"
-      },
+      "title": { "en": "Exhaust temperature is !{{higher|lower}} than ..." },
+      "titleFormatted": { "en": "Exhaust temperature is !{{higher|lower}} than [[degrees]] degrees" },
       "args": [
-        {
-          "type": "number",
-          "name": "degrees",
-          "placeholder": {
-            "en": "20"
-          },
-          "step": 0.1
-        }
+        { "type": "number", "name": "degrees", "placeholder": { "en": "20" }, "step": 0.1 }
       ]
     },
     {
       "id": "supply_humidity_is_higher_than",
-      "title": {
-        "en": "Supply humidity is !{{higher|lower}} than ..."
-      },
-      "titleFormatted": {
-        "en": "Supply humidity is !{{higher|lower}} than [[percent]] percent"
-      },
+      "title": { "en": "Supply humidity is !{{higher|lower}} than ..." },
+      "titleFormatted": { "en": "Supply humidity is !{{higher|lower}} than [[percent]] percent" },
       "args": [
-        {
-          "type": "number",
-          "name": "percent",
-          "placeholder": {
-            "en": "20"
-          },
-          "step": 0.1
-        }
+        { "type": "number", "name": "percent", "placeholder": { "en": "20" }, "step": 1 }
       ]
     },
     {
       "id": "extract_humidity_is_higher_than",
-      "title": {
-        "en": "Extract humidity is !{{higher|lower}} than ..."
-      },
-      "titleFormatted": {
-        "en": "Extract humidity is !{{higher|lower}} than [[percent]] percent"
-      },
+      "title": { "en": "Extract humidity is !{{higher|lower}} than ..." },
+      "titleFormatted": { "en": "Extract humidity is !{{higher|lower}} than [[percent]] percent" },
       "args": [
-        {
-          "type": "number",
-          "name": "percent",
-          "placeholder": {
-            "en": "20"
-          },
-          "step": 0.1
-        }
+        { "type": "number", "name": "percent", "placeholder": { "en": "20" }, "step": 1 }
       ]
     },
     {
       "id": "outdoor_humidity_is_higher_than",
-      "title": {
-        "en": "Outdoor humidity is !{{higher|lower}} than ..."
-      },
-      "titleFormatted": {
-        "en": "Outdoor humidity is !{{higher|lower}} than [[percent]] percent"
-      },
+      "title": { "en": "Outdoor humidity is !{{higher|lower}} than ..." },
+      "titleFormatted": { "en": "Outdoor humidity is !{{higher|lower}} than [[percent]] percent" },
       "args": [
-        {
-          "type": "number",
-          "name": "percent",
-          "placeholder": {
-            "en": "20"
-          },
-          "step": 0.1
-        }
+        { "type": "number", "name": "percent", "placeholder": { "en": "20" }, "step": 1 }
       ]
     },
     {
       "id": "exhaust_humidity_is_higher_than",
-      "title": {
-        "en": "Exhaust humidity is !{{higher|lower}} than ..."
-      },
-      "titleFormatted": {
-        "en": "Exhaust humidity is !{{higher|lower}} than [[percent]] percent"
-      },
+      "title": { "en": "Exhaust humidity is !{{higher|lower}} than ..." },
+      "titleFormatted": { "en": "Exhaust humidity is !{{higher|lower}} than [[percent]] percent" },
       "args": [
-        {
-          "type": "number",
-          "name": "percent",
-          "placeholder": {
-            "en": "20"
-          },
-          "step": 0.1
-        }
+        { "type": "number", "name": "percent", "placeholder": { "en": "20" }, "step": 1 }
       ]
     },
     {
       "id": "bypass_state_is_higher_than",
-      "title": {
-        "en": "Bypas state is !{{higher|lower}} than ..."
-      },
-      "titleFormatted": {
-        "en": "Bypass state is !{{higher|lower}} than [[percent]] percent"
-      },
+      "title": { "en": "Bypas state is !{{higher|lower}} than ..." },
+      "titleFormatted": { "en": "Bypass state is !{{higher|lower}} than [[percent]] percent" },
       "args": [
-        {
-          "type": "number",
-          "name": "percent",
-          "placeholder": {
-            "en": "20"
-          },
-          "step": 1
-        }
+        { "type": "number", "name": "percent", "placeholder": { "en": "20" }, "step": 1 }
       ]
     },
     {
       "id": "exhaust_fan_duty_is_higher_than",
-      "title": {
-        "en": "Exhaust fan duty is !{{higher|lower}} than ..."
-      },
-      "titleFormatted": {
-        "en": "Exhaust fan duty is !{{higher|lower}} than [[percent]] percent"
-      },
+      "title": { "en": "Exhaust fan duty is !{{higher|lower}} than ..." },
+      "titleFormatted": { "en": "Exhaust fan duty is !{{higher|lower}} than [[percent]] percent" },
       "args": [
-        {
-          "type": "number",
-          "name": "percent",
-          "placeholder": {
-            "en": "20"
-          },
-          "step": 1
-        }
+        { "type": "number", "name": "percent", "placeholder": { "en": "20" }, "step": 1 }
       ]
     },
     {
       "id": "supply_fan_duty_is_higher_than",
-      "title": {
-        "en": "Supply fan duty is !{{higher|lower}} than ..."
-      },
-      "titleFormatted": {
-        "en": "Supply fan duty is !{{higher|lower}} than [[percent]] percent"
-      },
+      "title": { "en": "Supply fan duty is !{{higher|lower}} than ..." },
+      "titleFormatted": { "en": "Supply fan duty is !{{higher|lower}} than [[percent]] percent" },
       "args": [
-        {
-          "type": "number",
-          "name": "percent",
-          "placeholder": {
-            "en": "20"
-          },
-          "step": 1
-        }
+        { "type": "number", "name": "percent", "placeholder": { "en": "20" }, "step": 1 }
       ]
     },
     {
       "id": "exhaust_fan_speed_is_higher_than",
-      "title": {
-        "en": "Exhaust fan speed is !{{higher|lower}} than ..."
-      },
-      "titleFormatted": {
-        "en": "Exhaust fan speed is !{{higher|lower}} than [[fan_speed]] rpm"
-      },
+      "title": { "en": "Exhaust fan speed is !{{higher|lower}} than ..." },
+      "titleFormatted": { "en": "Exhaust fan speed is !{{higher|lower}} than [[fan_speed]] rpm" },
       "args": [
-        {
-          "type": "number",
-          "name": "fan_speed",
-          "placeholder": {
-            "en": "1337"
-          },
-          "step": 1
-        }
+        { "type": "number", "name": "fan_speed", "placeholder": { "en": "1337" }, "step": 1 }
       ]
     },
     {
       "id": "supply_fan_speed_is_higher_than",
-      "title": {
-        "en": "Supply fan speed is !{{higher|lower}} than ..."
-      },
-      "titleFormatted": {
-        "en": "Supply fan speed is !{{higher|lower}} than [[fan_speed]] rpm"
-      },
+      "title": { "en": "Supply fan speed is !{{higher|lower}} than ..." },
+      "titleFormatted": { "en": "Supply fan speed is !{{higher|lower}} than [[fan_speed]] rpm" },
       "args": [
-        {
-          "type": "number",
-          "name": "fan_speed",
-          "placeholder": {
-            "en": "1337"
-          },
-          "step": 1
-        }
+        { "type": "number", "name": "fan_speed", "placeholder": { "en": "1337" }, "step": 1 }
       ]
     },
     {
       "id": "days_to_replace_filter_is_higher_than",
-      "title": {
-        "en": "Days to replace filter is !{{higher|lower}} than ..."
-      },
-      "titleFormatted": {
-        "en": "Days to replace filter is !{{higher|lower}} than [[days]] days"
-      },
+      "title": { "en": "Days to replace filter is !{{higher|lower}} than ..." },
+      "titleFormatted": { "en": "Days to replace filter is !{{higher|lower}} than [[days]] days" },
       "args": [
-        {
-          "type": "number",
-          "name": "days",
-          "placeholder": {
-            "en": "1"
-          },
-          "step": 1
-        }
+        { "type": "number", "name": "days", "placeholder": { "en": "1" }, "step": 1 }
       ]
     },
     {
       "id": "current_rmot_is_higher_than",
-      "title": {
-        "en": "Current RMOT is !{{higher|lower}} than ..."
-      },
-      "titleFormatted": {
-        "en": "Current RMOT is !{{higher|lower}} than [[degrees]] degrees"
-      },
+      "title": { "en": "Current RMOT is !{{higher|lower}} than ..." },
+      "titleFormatted": { "en": "Current RMOT is !{{higher|lower}} than [[degrees]] degrees" },
       "args": [
-        {
-          "type": "number",
-          "name": "degrees",
-          "placeholder": { "en": "10" }
-        }
+        { "type": "number", "name": "degrees", "placeholder": { "en": "10" } }
       ]
     },
     {
       "id": "temperature_profile_is",
-      "title": {
-        "en": "Temperature profile is ..."
-      },
-      "titleFormatted": {
-        "en": "Temperature profile is [[profile]]"
-      },
+      "title": { "en": "Temperature profile is ..." },
+      "titleFormatted": { "en": "Temperature profile is [[profile]]" },
       "args": [
-        {
-          "type": "dropdown",
-          "name": "profile",
-          "values": [
-            { "id": "2", "label": { "en": "Warm" } },
-            { "id": "0", "label": { "en": "Normal" } },
-            { "id": "1", "label": { "en": "Cool" } }
-          ]
-        }
+        { "type": "dropdown", "name": "profile", "values": [ { "id": "2", "label": { "en": "Warm" } }, { "id": "0", "label": { "en": "Normal" } }, { "id": "1", "label": { "en": "Cool" } } ] }
       ]
     },
     {
       "id": "ventilation_mode_is",
-      "title": {
-        "en": "Ventilation mode is ..."
-      },
-      "titleFormatted": {
-        "en": "Ventilation mode is [[ventilation_mode]]"
-      },
+      "title": { "en": "Ventilation mode is ..." },
+      "titleFormatted": { "en": "Ventilation mode is [[ventilation_mode]]" },
       "args": [
-        {
-          "type": "dropdown",
-          "name": "ventilation_mode",
-          "values": [
-            { "id": "1", "label": { "en": "Balance" } },
-            { "id": "2", "label": { "en": "Supply only" } },
-            { "id": "3", "label": { "en": "Extract only" } }
-          ]
-        }
+        { "type": "dropdown", "name": "ventilation_mode", "values": [ { "id": "1", "label": { "en": "Balance" } }, { "id": "2", "label": { "en": "Supply only" } }, { "id": "3", "label": { "en": "Extract only" } } ] }
       ]
     },
     {
       "id": "bypass_mode_is",
-      "title": {
-        "en": "Bypass mode is ..."
-      },
-      "titleFormatted": {
-        "en": "Bypass mode is [[bypass_mode]]"
-      },
+      "title": { "en": "Bypass mode is ..." },
+      "titleFormatted": { "en": "Bypass mode is [[bypass_mode]]" },
       "args": [
-        {
-          "type": "dropdown",
-          "name": "bypass_mode",
-          "values": [
-            { "id": "0", "label": { "en": "Auto" } },
-            { "id": "1", "label": { "en": "Activated" } },
-            { "id": "2", "label": { "en": "Deactivated" } }
-          ]
-        }
+        { "type": "dropdown", "name": "bypass_mode", "values": [ { "id": "0", "label": { "en": "Auto" } }, { "id": "1", "label": { "en": "Activated" } }, { "id": "2", "label": { "en": "Deactivated" } } ] }
       ]
     },
     {
       "id": "operating_mode_is",
-      "title": {
-        "en": "Operating mode is ..."
-      },
-      "titleFormatted": {
-        "en": "Operating mode is [[operating_mode]]"
-      },
+      "title": { "en": "Operating mode is ..." },
+      "titleFormatted": { "en": "Operating mode is [[operating_mode]]" },
       "args": [
-        {
-          "type": "dropdown",
-          "name": "operating_mode",
-          "values": [
-            { "id": "1", "label": { "en": "Manual" } },
-            { "id": "-1", "label": { "en": "Auto" } }
-          ]
-        }
+        { "type": "dropdown", "name": "operating_mode", "values": [ { "id": "1", "label": { "en": "Manual" } }, { "id": "-1", "label": { "en": "Auto" } } ] }
       ]
     },
     {
       "id": "fan_speed_mode_is",
-      "title": {
-        "en": "Ventilation fan speed is ..."
-      },
-      "titleFormatted": {
-        "en": "Ventilation fan speed is [[fan_speed]]"
-      },
+      "title": { "en": "Ventilation fan speed is ..." },
+      "titleFormatted": { "en": "Ventilation fan speed is [[fan_speed]]" },
       "args": [
-        {
-          "type": "dropdown",
-          "name": "fan_speed",
-          "values": [
-            { "id": "1", "label": { "en": "Low" } },
-            { "id": "2", "label": { "en": "Medium" } },
-            { "id": "3", "label": { "en": "High" } },
-            { "id": "0", "label": { "en": "Away (idle)" } }
-          ]
-        }
+        { "type": "dropdown", "name": "fan_speed", "values": [ { "id": "1", "label": { "en": "Low" } }, { "id": "2", "label": { "en": "Medium" } }, { "id": "3", "label": { "en": "High" } }, { "id": "0", "label": { "en": "Away (idle)" } } ] }
+      ]
+    },
+    {
+      "id": "measure_power_is_higher_than",
+      "title": { "en": "Power consumption is !{{higher|lower}} than ..." },
+      "titleFormatted": { "en": "Power consumption is !{{higher|lower}} than [[watts]] watts" },
+      "args": [
+        { "type": "number", "name": "watts", "placeholder": { "en": "100" }, "step": 1 }
       ]
     }
   ]

@@ -304,12 +304,124 @@
     ],
     "triggers": [
       {
-        "id": "measure_humidity_changed",
+        "id": "measure_temperature.supply_changed",
         "title": {
-          "en": "Humidity changed"
+          "en": "Supply temperature changed"
         },
         "hint": {
-          "en": "The measured humidity has changed"
+          "en": "Measured supply temperature has changed"
+        },
+        "tokens": [
+          {
+            "type": "number",
+            "name": "measure_temperature.supply",
+            "title": {
+              "en": "Supply temperature"
+            },
+            "example": {
+              "en": "13"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=comfoconnect-lan-c"
+          }
+        ]
+      },
+      {
+        "id": "measure_temperature.exhaust_changed",
+        "title": {
+          "en": "Exhaust temperature changed"
+        },
+        "hint": {
+          "en": "Measured exhaust temperature has changed"
+        },
+        "tokens": [
+          {
+            "type": "number",
+            "name": "measure_temperature.exhaust",
+            "title": {
+              "en": "Exhaust temperature"
+            },
+            "example": {
+              "en": "23"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=comfoconnect-lan-c"
+          }
+        ]
+      },
+      {
+        "id": "measure_temperature.extract_changed",
+        "title": {
+          "en": "Extract temperature changed"
+        },
+        "hint": {
+          "en": "Measured extract temperature has changed"
+        },
+        "tokens": [
+          {
+            "type": "number",
+            "name": "measure_temperature.extract",
+            "title": {
+              "en": "Extract temperature"
+            },
+            "example": {
+              "en": "20"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=comfoconnect-lan-c"
+          }
+        ]
+      },
+      {
+        "id": "measure_temperature.outdoor_changed",
+        "title": {
+          "en": "Outdoor temperature changed"
+        },
+        "hint": {
+          "en": "Measured outdoor temperature has changed"
+        },
+        "tokens": [
+          {
+            "type": "number",
+            "name": "measure_temperature.outdoor",
+            "title": {
+              "en": "Outdoor temperature"
+            },
+            "example": {
+              "en": "-2"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=comfoconnect-lan-c"
+          }
+        ]
+      },
+      {
+        "id": "measure_humidity.supply_changed",
+        "title": {
+          "en": "Supply humidity changed"
+        },
+        "hint": {
+          "en": "Measured supply humidity has changed"
         },
         "tokens": [
           {
@@ -321,27 +433,25 @@
             "example": {
               "en": "60"
             }
-          },
+          }
+        ],
+        "args": [
           {
-            "type": "number",
-            "name": "measure_humidity.extract",
-            "title": {
-              "en": "Extract humidity"
-            },
-            "example": {
-              "en": "60"
-            }
-          },
-          {
-            "type": "number",
-            "name": "measure_humidity.outdoor",
-            "title": {
-              "en": "Outdoor humidity"
-            },
-            "example": {
-              "en": "60"
-            }
-          },
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=comfoconnect-lan-c"
+          }
+        ]
+      },
+      {
+        "id": "measure_humidity.exhaust_changed",
+        "title": {
+          "en": "Exhaust humidity changed"
+        },
+        "hint": {
+          "en": "Measured exhaust humidity has changed"
+        },
+        "tokens": [
           {
             "type": "number",
             "name": "measure_humidity.exhaust",
@@ -349,7 +459,7 @@
               "en": "Exhaust humidity"
             },
             "example": {
-              "en": "60"
+              "en": "44"
             }
           }
         ],
@@ -362,52 +472,22 @@
         ]
       },
       {
-        "id": "measure_temperature_changed",
+        "id": "measure_humidity.extract_changed",
         "title": {
-          "en": "Temperature changed"
+          "en": "Extract humidity changed"
         },
         "hint": {
-          "en": "The measured temperature has changed"
+          "en": "Measured extract humidity has changed"
         },
         "tokens": [
           {
             "type": "number",
-            "name": "measure_temperature.supply",
+            "name": "measure_humidity.extract",
             "title": {
-              "en": "Supply temperature"
+              "en": "Extract humidity"
             },
             "example": {
-              "en": "20"
-            }
-          },
-          {
-            "type": "number",
-            "name": "measure_temperature.extract",
-            "title": {
-              "en": "Extract temperature"
-            },
-            "example": {
-              "en": "23"
-            }
-          },
-          {
-            "type": "number",
-            "name": "measure_temperature.outdoor",
-            "title": {
-              "en": "Outdoor temperature"
-            },
-            "example": {
-              "en": "-3"
-            }
-          },
-          {
-            "type": "number",
-            "name": "measure_temperature.exhaust",
-            "title": {
-              "en": "Exhaust temperature"
-            },
-            "example": {
-              "en": "20"
+              "en": "55"
             }
           }
         ],
@@ -420,12 +500,40 @@
         ]
       },
       {
-        "id": "measure_airflow_changed",
+        "id": "measure_humidity.outdoor_changed",
         "title": {
-          "en": "Airflow changed"
+          "en": "Outdoor humidity changed"
         },
         "hint": {
-          "en": "The measured airflow has changed"
+          "en": "Measured outdoor humidity has changed"
+        },
+        "tokens": [
+          {
+            "type": "number",
+            "name": "measure_humidity.outdoor",
+            "title": {
+              "en": "Outdoor humidity"
+            },
+            "example": {
+              "en": "87"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=comfoconnect-lan-c"
+          }
+        ]
+      },
+      {
+        "id": "measure_airflow.supply_changed",
+        "title": {
+          "en": "Supply airflow changed"
+        },
+        "hint": {
+          "en": "Measured supply airflow has changed"
         },
         "tokens": [
           {
@@ -437,7 +545,25 @@
             "example": {
               "en": "270"
             }
-          },
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=comfoconnect-lan-c"
+          }
+        ]
+      },
+      {
+        "id": "measure_airflow.exhaust_changed",
+        "title": {
+          "en": "Exhaust airflow changed"
+        },
+        "hint": {
+          "en": "Measured exhaust airflow has changed"
+        },
+        "tokens": [
           {
             "type": "number",
             "name": "measure_airflow.exhaust",
@@ -446,6 +572,62 @@
             },
             "example": {
               "en": "270"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=comfoconnect-lan-c"
+          }
+        ]
+      },
+      {
+        "id": "measure_fan_speed.supply_changed",
+        "title": {
+          "en": "Supply fan speed changed"
+        },
+        "hint": {
+          "en": "Measured supply fan speed has changed"
+        },
+        "tokens": [
+          {
+            "type": "number",
+            "name": "measure_fan_speed.supply",
+            "title": {
+              "en": "Supply fan speed"
+            },
+            "example": {
+              "en": "1337"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=comfoconnect-lan-c"
+          }
+        ]
+      },
+      {
+        "id": "measure_fan_speed.exhaust_changed",
+        "title": {
+          "en": "Exhaust fan speed changed"
+        },
+        "hint": {
+          "en": "Measured exhaust fan speed has changed"
+        },
+        "tokens": [
+          {
+            "type": "number",
+            "name": "measure_fan_speed.exhaust",
+            "title": {
+              "en": "Exhaust fan speed"
+            },
+            "example": {
+              "en": "1337"
             }
           }
         ],
@@ -503,6 +685,29 @@
             "example": {
               "en": "50"
             }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=comfoconnect-lan-c"
+          }
+        ]
+      },
+      {
+        "id": "measure_power_changed",
+        "title": {
+          "en": "Power consumption changed"
+        },
+        "tokens": [
+          {
+            "name": "measure_power",
+            "type": "number",
+            "title": {
+              "en": "Power"
+            },
+            "example": 100
           }
         ],
         "args": [
@@ -631,7 +836,7 @@
             "placeholder": {
               "en": "20"
             },
-            "step": 0.1
+            "step": 1
           }
         ]
       },
@@ -655,7 +860,7 @@
             "placeholder": {
               "en": "20"
             },
-            "step": 0.1
+            "step": 1
           }
         ]
       },
@@ -679,7 +884,7 @@
             "placeholder": {
               "en": "20"
             },
-            "step": 0.1
+            "step": 1
           }
         ]
       },
@@ -703,7 +908,7 @@
             "placeholder": {
               "en": "20"
             },
-            "step": 0.1
+            "step": 1
           }
         ]
       },
@@ -1071,6 +1276,30 @@
                 }
               }
             ]
+          }
+        ]
+      },
+      {
+        "id": "measure_power_is_higher_than",
+        "title": {
+          "en": "Power consumption is !{{higher|lower}} than ..."
+        },
+        "titleFormatted": {
+          "en": "Power consumption is !{{higher|lower}} than [[watts]] watts"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=comfoconnect-lan-c"
+          },
+          {
+            "type": "number",
+            "name": "watts",
+            "placeholder": {
+              "en": "100"
+            },
+            "step": 1
           }
         ]
       }

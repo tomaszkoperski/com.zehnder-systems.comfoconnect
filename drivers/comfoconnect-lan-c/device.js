@@ -18,7 +18,7 @@ class ComfoConnectLanC extends Device {
       'boost', 'fan_next_change', 'measure_fan_duty.supply', 'measure_fan_duty.exhaust',
       'bypass_state', 'bypass_mode', 'temperature_profile', 'operating_mode', 'fan_speed_mode',
       'measure_avoided.heating', 'measure_avoided.heating_total', 'measure_avoided.cooling', 'measure_avoided.cooling_total',
-      'measure_rmot',
+      'measure_rmot', 'measure_power',
     ];
 
     for (const capability of capabilitiesToAdd) {
@@ -198,11 +198,11 @@ class ComfoConnectLanC extends Device {
     });
 
     this.homey.flow.getConditionCard('exhaust_fan_speed_is_higher_than').registerRunListener(async (args, state) => {
-      return this.getCapabilityValue('measure_fan_speed.exhaust') > args.speed;
+      return this.getCapabilityValue('measure_fan_speed.exhaust') > args.fan_speed;
     });
 
     this.homey.flow.getConditionCard('supply_fan_speed_is_higher_than').registerRunListener(async (args, state) => {
-      return this.getCapabilityValue('measure_fan_speed.supply') > args.speed;
+      return this.getCapabilityValue('measure_fan_speed.supply') > args.fan_speed;
     });
 
     this.homey.flow.getConditionCard('days_to_replace_filter_is_higher_than').registerRunListener(async (args, state) => {
@@ -218,19 +218,19 @@ class ComfoConnectLanC extends Device {
     });
 
     this.homey.flow.getConditionCard('ventilation_mode_is').registerRunListener(async (args, state) => {
-      return this.getCapabilityValue('ventilation_mode') === args.mode;
+      return this.getCapabilityValue('ventilation_mode') === args.ventilation_mode;
     });
 
     this.homey.flow.getConditionCard('bypass_mode_is').registerRunListener(async (args, state) => {
-      return this.getCapabilityValue('bypass_mode') === args.mode;
+      return this.getCapabilityValue('bypass_mode') === args.bypass_mode;
     });
 
     this.homey.flow.getConditionCard('fan_speed_mode_is').registerRunListener(async (args, state) => {
-      return this.getCapabilityValue('fan_speed_mode') === args.mode;
+      return this.getCapabilityValue('fan_speed_mode') === args.fan_speed;
     });
 
     this.homey.flow.getConditionCard('operating_mode_is').registerRunListener(async (args, state) => {
-      return this.getCapabilityValue('operating_mode') === args.mode;
+      return this.getCapabilityValue('operating_mode') === args.operating_mode;
     });
 
     // await this.__updateDevice();
