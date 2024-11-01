@@ -58,5 +58,8 @@
   },
   "1.5.4": {
     "en": "Fixed Ventilation Mode and Fan Speed flow cards"
+  },
+  "1.5.5": {
+    "en": "Added trigger flows for fan speed, humidity and temperature"
   }
 }
